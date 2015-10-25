@@ -1,5 +1,3 @@
-import acm.graphics.GLabel;
-import acm.program.ConsoleProgram;
 import acm.program.GraphicsProgram;
 
 /**
@@ -8,8 +6,18 @@ import acm.program.GraphicsProgram;
 public class SudokuUI extends GraphicsProgram {
     SudokuGrid grid;
 
+    /**
+     * Adding mouse listeners to sense clicks, and be able to handle that action accordingly
+     */
+    public void init() {
+        addMouseListeners();
+    }
+
+    /**
+     * Main run method to initiate Sudoku AI program
+     */
     public void run() {
         grid = new SudokuGrid(9, "easy");
-        add(grid);
+        add(grid, 0, 0);
     }
 }
