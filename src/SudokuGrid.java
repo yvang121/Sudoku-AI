@@ -13,6 +13,7 @@ public class SudokuGrid extends GCompound {
     int dimension;
     String difficulty;
     Random random;
+    int[][] backendGrid;
 
     /**
      * Constructor for SudokuGrid objects.
@@ -23,6 +24,7 @@ public class SudokuGrid extends GCompound {
         this.difficulty = difficulty.toLowerCase(); // How difficult a puzzle is, will affect how many starting numbers there are
         this.dimension = dimension;
         this.random = new RandomGenerator(); // Randomly generate numbers to put onto GCompound
+        this.backendGrid = new int[dimension][dimension]; // Grid to store integers at grid locations
 
         if (Math.sqrt(dimension) - Math.floor(Math.sqrt(dimension)) > 0) {
             // If the difference between integer and double is greater than 0, it's not a perfect square.
@@ -78,7 +80,7 @@ public class SudokuGrid extends GCompound {
      * Adds empty squares to a designated pixel location
      * @param x the horizontal location to place empty square
      * @param y the vertical location to place empty square
-     */
+    */
     public void addEmptySquare(int x, int y) {
         GRect rect = new GRect(squareDimension, squareDimension); // Add empty square
         add(rect, x * squareDimension, y * squareDimension);
