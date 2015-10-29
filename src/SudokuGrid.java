@@ -9,7 +9,7 @@ import java.util.Random;
  * Created by Ye-Vang on 10/21/2015.
  */
 public class SudokuGrid extends GCompound {
-    private static final int squareDimension = 40;
+    private static final int SQUARE_DIMENSION = 40;
     int dimension;
     String difficulty;
     Random random;
@@ -25,6 +25,7 @@ public class SudokuGrid extends GCompound {
         this.dimension = dimension;
         this.random = new RandomGenerator(); // Randomly generate numbers to put onto GCompound
         this.backendGrid = new int[dimension][dimension]; // Grid to store integers at grid locations
+        //TODO: implement randomly placing integers based on difficulty
 
         if (Math.sqrt(dimension) - Math.floor(Math.sqrt(dimension)) > 0) {
             // If the difference between integer and double is greater than 0, it's not a perfect square.
@@ -34,13 +35,13 @@ public class SudokuGrid extends GCompound {
                 // Prints the stack trace error, then exits out of the GraphicsProgram window.
                 e.printStackTrace();
                 System.exit(-1);
-            } // TODO: should we just tell users to enter dimension size of 2, 3 or 4? Instead of throwing errors for
-            // TODO: wrong dimension sizes?
+            }
         } else {
             for (int row = 0; row < dimension; row++) { // Generate the grid
                 for (int column = 0; column < dimension; column++) {
                     addEmptySquare(row, column);
                 }
+                // TODO: implement how to connect array to grid canvas
             }
             addDividers();
             addBorders();
@@ -51,7 +52,7 @@ public class SudokuGrid extends GCompound {
      * Adds exterior borders around the Sudoku Grid object.
      */
     public void addBorders() {
-        int lengthOfLine = this.dimension * squareDimension;
+        int lengthOfLine = this.dimension * SQUARE_DIMENSION;
         GLine topXLine = new GLine(0, 1, lengthOfLine, 1); // Offset the line to make it look 'bolder'
         add(topXLine);
         GLine leftYLine = new GLine(1, 0, 1, lengthOfLine);
@@ -68,10 +69,10 @@ public class SudokuGrid extends GCompound {
     public void addDividers() {
         int divisor = (int) Math.sqrt(dimension); // How many divisors we're going to have
         for (int i = 1; i < divisor; i++) { // From 1 til max divisors:
-            int dividerLine = i * divisor * squareDimension; // Placement of divisor line
-            GLine xBoldLine = new GLine(dividerLine + 1, 0, dividerLine + 1, dimension * squareDimension);
+            int dividerLine = i * divisor * SQUARE_DIMENSION; // Placement of divisor line
+            GLine xBoldLine = new GLine(dividerLine + 1, 0, dividerLine + 1, dimension * SQUARE_DIMENSION);
             add(xBoldLine); // Adding line to GCompound
-            GLine yBoldLine = new GLine(0, dividerLine + 1, dimension * squareDimension, dividerLine + 1);
+            GLine yBoldLine = new GLine(0, dividerLine + 1, dimension * SQUARE_DIMENSION, dividerLine + 1);
             add(yBoldLine);
         }
     }
@@ -82,14 +83,14 @@ public class SudokuGrid extends GCompound {
      * @param y the vertical location to place empty square
     */
     public void addEmptySquare(int x, int y) {
-        GRect rect = new GRect(squareDimension, squareDimension); // Add empty square
-        add(rect, x * squareDimension, y * squareDimension);
+        GRect rect = new GRect(SQUARE_DIMENSION, SQUARE_DIMENSION); // Add empty square
+        add(rect, x * SQUARE_DIMENSION, y * SQUARE_DIMENSION);
     }
 
 
     // Getters and setters associated with the SudokuGrid object
-    public static int getSquareDimension() {
-        return squareDimension;
+    public static int getSQUARE_DIMENSION() {
+        return SQUARE_DIMENSION;
     }
 
     public int getDimension() {
@@ -100,11 +101,19 @@ public class SudokuGrid extends GCompound {
         return difficulty;
     }
 
+    public int[][] getBackendGrid() {
+        return backendGrid;
+    }
+
     public void setDimension(int dimension) {
         this.dimension = dimension;
     }
 
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public void setBackendGrid(int[][] backendGrid) {
+        this.backendGrid = backendGrid;
     }
 }
