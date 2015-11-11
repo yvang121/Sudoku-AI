@@ -2,11 +2,17 @@
  * Created by Ye on 11/10/2015.
  */
 public class SudokuEvaluator {
-    int[][] grid;
+    private int[][] grid;
 
     public SudokuEvaluator(int[][] grid) {
         this.grid = grid;
     }
 
+    public int[][] getGrid() {
+        return grid;
+    }
 
+    public void setGrid(int[][] grid) {
+        this.grid = grid;
+    }
 }
