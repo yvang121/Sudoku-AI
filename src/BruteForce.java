@@ -9,9 +9,10 @@ public class BruteForce {
      * Implement a constraint-propagation checker. Checks through column/row + subgrid to identify valid
      * integers.
      */
-    RandomGenerator randomGenerator;
-    int[][] grid;
-    SudokuEvaluator bruteEval;
+    private RandomGenerator randomGenerator;
+    private int[][] grid;
+    private SudokuEvaluator bruteEval;
+
 
     public BruteForce(int[][] grid) {
         this.grid = grid;

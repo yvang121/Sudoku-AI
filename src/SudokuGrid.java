@@ -10,10 +10,10 @@ import java.util.Random;
  */
 public class SudokuGrid extends GCompound {
     private static final int SQUARE_DIMENSION = 40;
-    int dimension;
-    String difficulty;
-    Random random;
-    int[][] backendGrid;
+    private int dimension;
+    private String difficulty;
+    private Random random;
+    private int[][] backendGrid;
 
     /**
      * Constructor for SudokuGrid objects.
