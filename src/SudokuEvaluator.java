@@ -8,6 +8,7 @@ public class SudokuEvaluator {
     public SudokuEvaluator() {
         col = new int[9];
         row = new int[9];
+        int k = 1;
     }
 
     private boolean checker (int[][] grid) {
