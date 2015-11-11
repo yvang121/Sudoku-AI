@@ -10,7 +10,7 @@ public class SudokuUI extends GraphicsProgram {
      * Main run method to initiate Sudoku AI program
      */
     public void run() {
-        grid = new SudokuGrid(16, "easy");
+        grid = new SudokuGrid(9, "easy");
         add(grid, 0, 0);
     }
 }
