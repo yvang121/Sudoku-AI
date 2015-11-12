@@ -4,8 +4,6 @@ import acm.graphics.GLine;
 import acm.graphics.GRect;
 import acm.util.RandomGenerator;
 
-import java.util.Random;
-
 /**
  * Created by Ye-Vang on 10/21/2015.
  */
@@ -13,9 +11,12 @@ public class SudokuGrid extends GCompound {
     private static final int SQUARE_DIMENSION = 40;
     private static final int X_COORDINATE = 17;
     private static final int Y_COORDINATE = 25;
+    private static final double EASY_MODIFIER = 0.20;
+    private static final double MED_MODIFIER = 0.15;
+    private static final double HARD_MODIFIER = 0.10;
     private int dimension;
     private String difficulty;
-    private Random random;
+    private RandomGenerator random;
     private int[][] backendGrid;
 
     /**
@@ -28,7 +29,6 @@ public class SudokuGrid extends GCompound {
         this.dimension = dimension;
         this.random = new RandomGenerator(); // Randomly generate numbers to put onto GCompound
         this.backendGrid = new int[dimension][dimension]; // Grid to store integers at grid locations
-        //TODO: implement randomly placing integers based on difficulty
 
         if (Math.sqrt(dimension) - Math.floor(Math.sqrt(dimension)) > 0) {
             // If the difference between integer and double is greater than 0, it's not a perfect square.
@@ -47,7 +47,8 @@ public class SudokuGrid extends GCompound {
             }
             addDividers();
             addBorders();
-//            addNumbers(backendGrid);
+            initNumbers();
+            addNumToUI(backendGrid);
         }
     }
 
@@ -90,15 +91,48 @@ public class SudokuGrid extends GCompound {
         add(rect, x * SQUARE_DIMENSION, y * SQUARE_DIMENSION);
     }
 
-    public void addNumbers(int[][] backendGrid) {
+    public void addNumToUI(int[][] backendGrid) {
         for (int i = 0; i < backendGrid.length; i++) {
             for (int j = 0; j < backendGrid.length; j++) {
-                GLabel numberLabel = new GLabel(Integer.toString(backendGrid[i][j]));
-                add(numberLabel, X_COORDINATE + i*SQUARE_DIMENSION, Y_COORDINATE + j*SQUARE_DIMENSION);
+                if (backendGrid[i][j] != 0) {
+                    GLabel numberLabel = new GLabel(Integer.toString(backendGrid[i][j]));
+                    add(numberLabel, X_COORDINATE + i * SQUARE_DIMENSION, Y_COORDINATE + j * SQUARE_DIMENSION);
+                }
             }
         }
     }
 
+    public int[][] initNumbers() {
+        int numberOfValues = dimension * dimension;
+        if (difficulty.equals("easy") | difficulty.equals("e")) {
+            // How many numbers to generate based on difficulty
+            int numbers = (int) Math.ceil(numberOfValues*EASY_MODIFIER);
+            //TODO: has to check to see if the randomly generated value isn't already in the same row/col/subgrid.
+            for (int i = 0; i <= numbers; i++) {
+                int xCoord = random.nextInt(dimension);
+                int yCoord = random.nextInt(dimension);
+                int genRandValue = random.nextInt(1, dimension);
+                backendGrid[xCoord][yCoord] = genRandValue;
+            }
+        } else if (difficulty.equals("med") | (difficulty.equals("medium")) | (difficulty.equals("m"))) {
+            int numbers = (int) Math.ceil(numberOfValues*MED_MODIFIER);
+            for (int i = 0; i <= numbers; i++) {
+                int xRandCoord = random.nextInt(dimension);
+                int yRandCoord = random.nextInt(dimension);
+                int genRandValue = random.nextInt(1, dimension);
+                backendGrid[xRandCoord][yRandCoord] = genRandValue;
+            }
+        } else if (difficulty.equals("hard") | difficulty.equals("h")) {
+            int numbers = (int) Math.ceil(numberOfValues*HARD_MODIFIER);
+            for (int i = 0; i <= numbers; i++) {
+                int xCoord = random.nextInt(dimension);
+                int yCoord = random.nextInt(dimension);
+                int genRandValue = random.nextInt(1, dimension);
+                backendGrid[xCoord][yCoord] = genRandValue;
+            }
+        }
+        return backendGrid;
+    }
     // Getters and setters associated with the SudokuGrid object
     public static int getSQUARE_DIMENSION() {
         return SQUARE_DIMENSION;
