@@ -5,14 +5,14 @@ public class SudokuEvaluator {
     private int[] col;
     private int[] row;
 
-    public SudokuEvaluator() {
-        col = new int[9];
-        row = new int[9];
+    public SudokuEvaluator(int gridDimension) {
+        col = new int[gridDimension];
+        row = new int[gridDimension];
     }
 
-    public boolean checker (int[][] grid) {
-        for (int i = 0; i <= grid.length - 1; i++) {
-            for (int j = 0; j <= grid.length - 1; j++) {
+    public boolean checker(int[][] grid) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
                 row[grid[j][i]] += 1;
                 col[grid[i][j]] += 1;
                 if (row[grid[j][i]] > i + 1 || col[grid[i][j]] > i + 1) {
