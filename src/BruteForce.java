@@ -33,4 +33,10 @@ public class BruteForce {
     public RandomGenerator getRandomGenerator() {
         return randomGenerator;
     }
+
+    public void setRandomGenerator(RandomGenerator randomGenerator) {
+        this.randomGenerator = randomGenerator;
+    }
 }
+
+
