@@ -16,10 +16,12 @@ public class SudokuEvaluator {
                 row[grid[j][i]] += 1;
                 col[grid[i][j]] += 1;
                 if (row[grid[j][i]] > i + 1 || col[grid[i][j]] > i + 1) {
+                    System.out.println("This solution is INCORRECT.");
                     return false;
                 }
             }
         }
+        System.out.println("This solution is CORRECT.");
         return true;
     }
 
