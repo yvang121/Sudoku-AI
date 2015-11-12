@@ -20,10 +20,10 @@ public class BruteForce {
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid.length; j++){
                 if(grid[j][i] == 0){
-                    grid[j][i] = randomGenerator.nextInt(1, grid.length);
+                    grid[j][i] += randomGenerator.nextInt(1, grid.length);
                 }
                 if(grid[i][j] == 0){
-                    grid[i][j] = randomGenerator.nextInt(1, grid.length);
+                    grid[i][j] += randomGenerator.nextInt(1, grid.length);
                 }
             }
         }
