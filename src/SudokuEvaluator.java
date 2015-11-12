@@ -6,8 +6,8 @@ public class SudokuEvaluator {
     private int[] row;
 
     public SudokuEvaluator(int gridDimension) {
-        col = new int[gridDimension];
-        row = new int[gridDimension];
+        col = new int[gridDimension + 1];
+        row = new int[gridDimension + 1];
     }
 
     public boolean checker(int[][] grid) {
