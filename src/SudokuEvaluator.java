@@ -11,6 +11,7 @@ public class SudokuEvaluator {
     }
 
     public boolean checker(int[][] grid) {
+        //TODO: check sub-grids too.
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid.length; j++) {
                 row[grid[j][i]] += 1;
