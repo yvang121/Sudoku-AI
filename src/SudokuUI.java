@@ -17,5 +17,8 @@ public class SudokuUI extends GraphicsProgram {
         BruteForce bruteForce = new BruteForce();
         System.out.println(Arrays.deepToString(bruteForce.implement(grid.getBackendGrid())));
         grid.setBackendGrid(bruteForce.implement(grid.getBackendGrid()));
+        SudokuEvaluator gridCheck = new SudokuEvaluator(grid.getDimension());
+        System.out.println(gridCheck.checker(grid.getBackendGrid()));
+        grid.addNumbers(grid.getBackendGrid());
     }
 }
