@@ -1,5 +1,7 @@
 import acm.program.GraphicsProgram;
 
+import java.util.Arrays;
+
 /**
  * Created by Ye on 10/21/2015.
  */
@@ -12,6 +14,8 @@ public class SudokuUI extends GraphicsProgram {
     public void run() {
         grid = new SudokuGrid(9, "easy");
         add(grid, 0, 0);
-        BruteForce bruteForce = new BruteForce(grid.getBackendGrid());
+        BruteForce bruteForce = new BruteForce();
+        System.out.println(Arrays.deepToString(bruteForce.implement(grid.getBackendGrid())));
+        grid.setBackendGrid(bruteForce.implement(grid.getBackendGrid()));
     }
 }

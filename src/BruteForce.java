@@ -10,29 +10,29 @@ public class BruteForce {
      * integers.
      */
     private RandomGenerator randomGenerator;
-    private int[][] grid;
     private SudokuEvaluator bruteEval;
 
 
-    public BruteForce(int[][] grid) {
-        this.grid = grid;
+    public BruteForce() {
         this.randomGenerator = new RandomGenerator();
-        this.bruteEval = new SudokuEvaluator(grid);
+        this.bruteEval = new SudokuEvaluator();
+    }
+
+    public int[][] implement(int[][] grid){
+        for(int i=0; i<=grid.length-1; i++){
+            for(int j=0; j<=grid.length-1; j++){
+                if(grid[j][i] == 0){
+                    grid[j][i] = randomGenerator.nextInt(1,9);
+                }
+                if(grid[i][j] == 0){
+                    grid[i][j] = randomGenerator.nextInt(1,9);
+                }
+            }
+        }
+        return grid;
     }
 
     public RandomGenerator getRandomGenerator() {
         return randomGenerator;
-    }
-
-    public int[][] getGrid() {
-        return grid;
-    }
-
-    public void setRandomGenerator(RandomGenerator randomGenerator) {
-        this.randomGenerator = randomGenerator;
-    }
-
-    public void setGrid(int[][] grid) {
-        this.grid = grid;
     }
 }
