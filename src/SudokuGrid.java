@@ -1,4 +1,5 @@
 import acm.graphics.GCompound;
+import acm.graphics.GLabel;
 import acm.graphics.GLine;
 import acm.graphics.GRect;
 import acm.util.RandomGenerator;
@@ -10,6 +11,8 @@ import java.util.Random;
  */
 public class SudokuGrid extends GCompound {
     private static final int SQUARE_DIMENSION = 40;
+    private static final int X_COORDINATE = 17;
+    private static final int Y_COORDINATE = 25;
     private int dimension;
     private String difficulty;
     private Random random;
@@ -41,10 +44,10 @@ public class SudokuGrid extends GCompound {
                 for (int column = 0; column < dimension; column++) {
                     addEmptySquare(row, column);
                 }
-                // TODO: implement how to connect array to grid canvas
             }
             addDividers();
             addBorders();
+//            addNumbers(backendGrid);
         }
     }
 
@@ -87,6 +90,14 @@ public class SudokuGrid extends GCompound {
         add(rect, x * SQUARE_DIMENSION, y * SQUARE_DIMENSION);
     }
 
+    public void addNumbers(int[][] backendGrid) {
+        for (int i = 0; i < backendGrid.length; i++) {
+            for (int j = 0; j < backendGrid.length; j++) {
+                GLabel numberLabel = new GLabel(Integer.toString(backendGrid[i][j]));
+                add(numberLabel, X_COORDINATE + i*SQUARE_DIMENSION, Y_COORDINATE + j*SQUARE_DIMENSION);
+            }
+        }
+    }
 
     // Getters and setters associated with the SudokuGrid object
     public static int getSQUARE_DIMENSION() {
@@ -107,10 +118,6 @@ public class SudokuGrid extends GCompound {
 
     public void setDimension(int dimension) {
         this.dimension = dimension;
-    }
-
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
     }
 
     public void setBackendGrid(int[][] backendGrid) {
