@@ -55,8 +55,8 @@ public class SudokuGrid extends GCompound {
     /**
      * Adds exterior borders around the Sudoku Grid object.
      */
-    public void addBorders() {
-        int lengthOfLine = this.dimension * SQUARE_DIMENSION;
+    private void addBorders() {
+        int lengthOfLine = dimension * SQUARE_DIMENSION;
         GLine topXLine = new GLine(0, 1, lengthOfLine, 1); // Offset the line to make it look 'bolder'
         add(topXLine);
         GLine leftYLine = new GLine(1, 0, 1, lengthOfLine);
@@ -70,7 +70,7 @@ public class SudokuGrid extends GCompound {
     /**
      * Adds dividers to clearly indicate subgrids in the Sudoku Grid
      */
-    public void addDividers() {
+    private void addDividers() {
         int divisor = (int) Math.sqrt(dimension); // How many divisors we're going to have
         for (int i = 1; i < divisor; i++) { // From 1 til max divisors:
             int dividerLine = i * divisor * SQUARE_DIMENSION; // Placement of divisor line
@@ -86,7 +86,7 @@ public class SudokuGrid extends GCompound {
      * @param x the horizontal location to place empty square
      * @param y the vertical location to place empty square
     */
-    public void addEmptySquare(int x, int y) {
+    private void addEmptySquare(int x, int y) {
         GRect rect = new GRect(SQUARE_DIMENSION, SQUARE_DIMENSION); // Add empty square
         add(rect, x * SQUARE_DIMENSION, y * SQUARE_DIMENSION);
     }
@@ -102,7 +102,7 @@ public class SudokuGrid extends GCompound {
         }
     }
 
-    public int[][] initNumbers() {
+    private int[][] initNumbers() {
         int numberOfValues = dimension * dimension;
         if (difficulty.equals("easy") | difficulty.equals("e")) {
             // How many numbers to generate based on difficulty
