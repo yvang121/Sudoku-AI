@@ -23,7 +23,7 @@ public class SudokuUI extends GraphicsProgram {
         System.out.println(Arrays.deepToString(grid.getBackendGrid()));
         System.out.println(Arrays.deepToString(bruteForce.implement(grid.getBackendGrid())));
         grid.setBackendGrid(bruteForce.implement(grid.getBackendGrid()));
-        SudokuEvaluator gridCheck = new SudokuEvaluator(grid.getDimension());
+        SudokuEvaluator gridCheck = new SudokuEvaluator(grid.getBackendGrid());
 
 //        while (true) {
 //            grid = new SudokuGrid(4, "easy");
@@ -37,8 +37,6 @@ public class SudokuUI extends GraphicsProgram {
 //                break;
 //            }
 //        }
-
-        gridCheck.checker(grid.getBackendGrid());
         grid.addNumToUI(grid.getBackendGrid());
 
 //        petList = new JComboBox(petStrings);
