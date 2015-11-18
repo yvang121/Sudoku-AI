@@ -22,9 +22,6 @@ public class BruteForce {
                 if(grid[j][i] == 0){
                     grid[j][i] += randomGenerator.nextInt(1, grid.length);
                 }
-                if(grid[i][j] == 0){
-                    grid[i][j] += randomGenerator.nextInt(1, grid.length);
-                }
             }
         }
         return grid;
