@@ -64,7 +64,7 @@ public class SudokuEvaluator {
                 if (j%subDimension == 0 && section != 0){
                     section += 1;
                 }
-                subgrid[section][j%subDimension] = grid[i][j];
+                subgrid[section][j%subDimension + sectionPos] = grid[i][j];
             }
         }
         String correct = "|Solution is CORRECT.|";
