@@ -47,6 +47,26 @@ public class SudokuEvaluator {
                 }
             }
         }
+
+        //place into subgrids
+        int section = -subDimension;
+        int sectionPos = 0;
+        for (int i=0; i < dimension; i++) {
+            if (i%subDimension == 0){
+                section += subDimension;
+                sectionPos = 0;
+            }
+            if (i%subDimension != 0){
+                sectionPos += subDimension;
+            }
+            for (int j = 0; j <dimension; j++){
+
+                if (j%subDimension == 0 && section != 0){
+                    section += 1;
+                }
+                subgrid[section][j%subDimension] = grid[i][j];
+            }
+        }
         String correct = "|Solution is CORRECT.|";
         String dashes = "";
         for (char letter : correct.toCharArray()) {
