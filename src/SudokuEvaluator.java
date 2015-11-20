@@ -12,8 +12,9 @@ public class SudokuEvaluator {
 
     public boolean checker() {
         int dimension = grid.length;
-        int[] col = new int[dimension + 1];
-        int[] row = new int[dimension + 1];
+        int[] col = new int[dimension];
+        int[] row = new int[dimension];
+        int[] sub = new int[dimension];
         int subDimension = (int) Math.sqrt(dimension);
         int[][] subgrid = new int[dimension][dimension];
         int[] subColArray = new int[subDimension];
@@ -36,7 +37,8 @@ public class SudokuEvaluator {
             for (int j = 0; j < dimension; j++) {
                 row[grid[j][i]] += 1;
                 col[grid[i][j]] += 1;
-                if (row[grid[j][i]] > i + 1 || col[grid[i][j]] > i + 1) {
+                sub[grid[i][j]] += 1;
+                if (row[grid[j][i]] > i + 1 || col[grid[i][j]] > i + 1 || sub[grid[i][j]] > i+1) {
                     String incorrect = "|Solution is INCORRECT.|";
                     String dashes = "";
                     for (char letter : incorrect.toCharArray()) {
