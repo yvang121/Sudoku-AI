@@ -61,12 +61,12 @@ public class SudokuEvaluator {
             if (i%subDimension != 0){
                 sectionPos += subDimension;
             }
+            int currSection = section;
             for (int j = 0; j <dimension; j++){
-
-                if (j%subDimension == 0 && section != 0){
-                    section += 1;
+                if (j%subDimension == 0 && j != 0){
+                    currSection += 1;
                 }
-                subgrid[section][j%subDimension + sectionPos] = grid[i][j];
+                subgrid[currSection][j%subDimension + sectionPos] = grid[i][j];
             }
         }
         String correct = "|Solution is CORRECT.|";
