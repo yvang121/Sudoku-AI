@@ -1,15 +1,12 @@
 import acm.program.GraphicsProgram;
 
-import javax.swing.*;
-import java.util.Arrays;
-
 /**
  * Created by Ye on 10/21/2015.
  */
 public class SudokuUI extends GraphicsProgram {
     private SudokuGrid grid;
-    private String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
-    JComboBox petList;
+//    private String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
+//    JComboBox petList;
     // Combo box for drop-down. Easy parameter changing.
 
     /**
@@ -17,27 +14,16 @@ public class SudokuUI extends GraphicsProgram {
      */
     public void run() {
         grid = new SudokuGrid(4, "e");
+        int[][] grid1 = {{1,2,3,4},{3,4,1,2},{2,3,4,1},{4,1,2,3}};
+        grid.setBackendGrids(grid1);
         add(grid, 0, 0);
         grid.addNumToUI(grid.getBackendGrid());
-        BruteForce bruteForce = new BruteForce();
-        System.out.println(Arrays.deepToString(grid.getBackendGrid()));
-        System.out.println(Arrays.deepToString(bruteForce.implement(grid.getBackendGrid())));
-        grid.setBackendGrid(bruteForce.implement(grid.getBackendGrid()));
-        SudokuEvaluator gridCheck = new SudokuEvaluator(grid.getBackendGrid());
-
-//        while (true) {
-//            grid = new SudokuGrid(4, "easy");
-//            BruteForce bruteForce = new BruteForce();
-//            int[][] genBruteForce = bruteForce.implement(grid.getBackendGrid());
-//            System.out.println(Arrays.deepToString(genBruteForce));
-//            SudokuEvaluator gridCheck = new SudokuEvaluator(grid.getDimension());
-//            if (gridCheck.checker(genBruteForce)) {
-//                add(grid, 0, 0);
-//                grid.addNumToUI(genBruteForce);
-//                break;
-//            }
-//        }
-        grid.addNumToUI(grid.getBackendGrid());
+//        BruteForce bruteForce = new BruteForce();
+//        grid.setBackendGrids(bruteForce.implement(grid.getBackendGrid()));
+//        SudokuEvaluator gridCheck = new SudokuEvaluator(grid.getBackendGrid());
+//        grid.addNumToUI(grid.getBackendGrid());
+//        System.out.println(Arrays.deepToString(grid.getBackendGrid()));
+//        System.out.println(Arrays.deepToString(grid.getBackendSubgrid()));
 
 //        petList = new JComboBox(petStrings);
 //        add(petList);
