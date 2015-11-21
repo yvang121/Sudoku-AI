@@ -8,6 +8,16 @@ public class BruteForce {
      * After each iteration, it should check what integer values are invalid to be placed in the grid.
      * Implement a constraint-propagation checker. Checks through column/row + subgrid to identify valid
      * integers.
+     *
+     * Backtracking:
+     *   Find row, col of an unassigned cell
+     If there is none, return true
+     For digits from 1 to 9
+     a) If there is no conflict for digit at row,col
+     assign digit to row,col and recursively try fill in rest of grid
+     b) If recursion successful, return true
+     c) Else, remove digit and try another
+     If all digits have been tried and nothing worked, return false
      */
     private RandomGenerator randomGenerator;
 
