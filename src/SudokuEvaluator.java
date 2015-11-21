@@ -5,11 +5,11 @@ import java.util.*;
  */
 public class SudokuEvaluator {
     int[][] grid;
-    int[][][] subgrid;
+    int[][] subgrid;
 
     public SudokuEvaluator(int[][] grid) {
         this.grid = grid;
-        this.subgrid = generateSubgrids();
+//        this.subgrid = generate2dSubgrid();
     }
 
     /**
@@ -35,7 +35,8 @@ public class SudokuEvaluator {
 
     public boolean checkSubgrid(int row, int column) {
         int subDimension = (int) Math.sqrt(grid.length);
-        int[] subArray = subgrid[(int)Math.floor(row/subDimension)][(int)Math.floor(column/subDimension)];
+        int[][][] sub3dgrid = generateSubgrids();
+        int[] subArray = sub3dgrid[(int)Math.floor(row/subDimension)][(int)Math.floor(column/subDimension)];
         return checkDuplicates(subArray);
     }
 
@@ -105,25 +106,32 @@ public class SudokuEvaluator {
                 }
             }
         }
-//        int section = -subDimension;
-//        int sectionPos = 0;
-//        for (int i=0; i < dimension; i++) {
-//            if (i%subDimension == 0){
-//                section += subDimension;
-//                sectionPos = 0;
-//            }
-//            if (i%subDimension != 0){
-//                sectionPos += subDimension;
-//            }
-//            for (int j = 0; j <dimension; j++){
-//
-//                if (j%subDimension == 0 && section != 0){
-//                    section += 1;
-//                }
-//                subgrid[section][j%subDimension + sectionPos] = grid[i][j];
-//            }
-//        }
         return finalSubgrid;
+    }
+
+    public int[][] generate2dSubgrid() {
+        int dimension = grid.length;
+        int subDimension = (int)Math.sqrt(dimension);
+        int section = -subDimension;
+        int sectionPos = 0;
+        int[][] subgrid = new int[dimension][dimension];
+
+        for (int i = 0; i < dimension; i++) {
+            if (i%subDimension == 0){
+                section += subDimension;
+                sectionPos = 0;
+            }
+            if (i%subDimension != 0){
+                sectionPos += subDimension;
+            }
+            for (int j = 0; j <dimension; j++){
+                if (j%subDimension == 0 && section != 0){
+                    section += 1;
+                }
+                subgrid[section][j % subDimension + sectionPos] = grid[i][j];
+            }
+        }
+        return subgrid;
     }
 
     public void printIncorrect() {
@@ -132,7 +140,7 @@ public class SudokuEvaluator {
         for (char letter : incorrect.toCharArray()) {
             dashes += '-';
         }
-        System.out.println(dashes + "\n" + incorrect + "\n" + dashes);
+        System.out.println(dashes + "\n" + incorrect + " => " + Arrays.deepToString(grid) + "\n" + dashes);
     }
 
     public void printCorrect() {
@@ -141,6 +149,6 @@ public class SudokuEvaluator {
         for (char letter : correct.toCharArray()) {
             dashes += '-';
         }
-        System.out.println(dashes + "\n" + correct + "\n" + dashes);
+        System.out.println(dashes + "\n" + correct + " => " + Arrays.deepToString(grid) + "\n" + dashes);
     }
 }
