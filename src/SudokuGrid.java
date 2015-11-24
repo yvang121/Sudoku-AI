@@ -30,7 +30,7 @@ public class SudokuGrid extends GCompound {
         this.dimension = dimension;
         this.subDimension = (int) Math.sqrt(dimension);
         this.backendGrid = new int[dimension][dimension]; // Grid to store integers at grid locations
-        this.backendSubgrid = generateSubgrids();
+        this.backendSubgrid = generateSubgrid();
 
         if (Math.sqrt(dimension) - Math.floor(Math.sqrt(dimension)) > 0) {
             // If the difference between integer and double is greater than 0, it's not a perfect square.
@@ -49,9 +49,136 @@ public class SudokuGrid extends GCompound {
             }
             addDividers();
             addBorders();
-//            initNumbers();
+            initNumbers();
             addNumToUI(backendGrid);
         }
+    }
+
+    /**
+     * Initialize this grid with random location, random values. Has to make sure there are no duplicates!
+     * @return backendGrid that values were inserted into
+     */
+    private int[][] initNumbers() {
+        int totalNumValues = dimension * dimension;
+        int xRandCoord;
+        int yRandCoord;
+        boolean noDuplicates;
+        int genRandValue;
+        if (difficulty.equals("easy") | difficulty.equals("e")) {
+            // How many numbers to generate based on difficulty
+            int numbers = (int) Math.ceil(totalNumValues*EASY_MODIFIER);
+            for (int i = 0; i <= numbers; i++) {
+                initGrid();
+            }
+        } else if (difficulty.equals("med") | (difficulty.equals("medium")) | (difficulty.equals("m"))) {
+            int numbers = (int) Math.ceil(totalNumValues*MED_MODIFIER);
+            for (int i = 0; i <= numbers; i++) {
+                initGrid();
+            }
+        } else if (difficulty.equals("hard") | difficulty.equals("h")) {
+            int numbers = (int) Math.ceil(totalNumValues*HARD_MODIFIER);
+            for (int i = 0; i <= numbers; i++) {
+                initGrid();
+            }
+        }
+        return backendGrid;
+    }
+
+    // TODO: New bug--just because it initially doesn't conflict, it can also prevent it from ever being solved.
+    // Todo: find the solution(?) before giving only partial initialization of solution?
+    /**
+     * Initialize the grid with random values (1 to length) at random locations
+     */
+    public void initGrid() {
+        boolean noDuplicates;
+        boolean collision;
+        RandomGenerator random = new RandomGenerator();
+        int xRandCoord = random.nextInt(dimension);  // generate a random integer for x position
+        int yRandCoord = random.nextInt(dimension);  // generate random integer for y position
+        int genRandValue = random.nextInt(1, dimension);  // generate random value for (y, x) grid pos
+//        System.out.println("Initial y and x: " + "(" + yRandCoord + ", " + xRandCoord + ")");
+        noDuplicates = checkInit(yRandCoord, xRandCoord, genRandValue);
+        while (!noDuplicates || backendGrid[yRandCoord][xRandCoord] != 0) {
+            // Check to see if placing randomly gen'd value conflicts with same value in another row/col/subgrid
+            // Also take into account that we could be placing a value that's already generated into the same spot
+            RandomGenerator newRandGen = new RandomGenerator();
+            xRandCoord = newRandGen.nextInt(dimension);
+            yRandCoord = newRandGen.nextInt(dimension);
+            genRandValue = newRandGen.nextInt(1, dimension);
+            noDuplicates = checkInit(yRandCoord, xRandCoord, genRandValue);
+//            collision = backendGrid[yRandCoord][xRandCoord] != 0;
+//            System.out.println("Collision: " + collision);
+        }
+//        System.out.println("Result y and x: " + "(" + yRandCoord + ", " + xRandCoord + ")" +
+//                " Value inserted: " + genRandValue + "\n");
+        backendGrid[yRandCoord][xRandCoord] = genRandValue;
+        backendSubgrid = generateSubgrid();
+    }
+
+    /**
+     * Checks if a value can be placed in a certain row/column/subgrid by checking for duplicates.
+     * @param row it will be placed in.
+     * @param column it will be placed in.
+     * @param value that will be inserted into backend grid.
+     * @return true if no duplicates, false if duplicates were found.
+     */
+    public boolean checkInit(int row, int column, int value) {
+        int[] colArray = new int[dimension+1];
+        int[] rowArray = new int[dimension+1];
+        int[] subArray = new int[dimension+1];
+        colArray[colArray.length-1] = value;
+        rowArray[rowArray.length-1] = value;
+        subArray[subArray.length-1] = value;
+        int subgridX = (int) Math.floor(column/subDimension);
+        int subgridY = (int) Math.floor(row/subDimension);
+        SudokuEvaluator eval = new SudokuEvaluator(backendGrid);
+
+        // for each index in rowArray, add from corresponding
+        System.arraycopy(backendGrid[row], 0, rowArray, 0, dimension);
+        for (int r = 0; r < dimension; r++) {
+            colArray[r] = backendGrid[r][column];
+        }
+        System.arraycopy(backendSubgrid[subgridY][subgridX], 0, subArray, 0, dimension);
+        boolean checkCol = eval.checkDuplicates(colArray);
+        boolean checkRow = eval.checkDuplicates(rowArray);
+        boolean checkSubs = eval.checkDuplicates(subArray);
+//        String dashes = "-----------------------------------------------------------------";
+//        System.out.println(dashes);
+//        System.out.println("Grid: " + Arrays.deepToString(backendGrid));
+//        System.out.println("Subgrid: " + Arrays.deepToString(eval.getSubgrid()));
+//        System.out.println("Transferred row " + row +
+//                ", value to insert: " + value + " " + Arrays.toString(rowArray));
+//        System.out.println("Transferred column " + column +
+//                ", value to insert: " + value + " " + Arrays.toString(colArray));
+//        System.out.println("Transferred subgrid: " + Arrays.toString(subArray));
+//        System.out.println("Initialize status: " + (checkCol & checkRow & checkSubs) + "\n" +
+//                dashes);
+        return checkCol & checkRow & checkSubs;
+    }
+
+    /**
+     * Generate the 3d subgrid of this Sudoku grid.
+     * @return 3d Subgrids
+     */
+    public int[][][] generateSubgrid() {
+        int dimension = backendGrid.length;
+        int subDimension = (int) Math.sqrt(dimension);
+        int[][][] finalSubgrid = new int[subDimension][subDimension][dimension];
+        // Add values from grid to subgrid
+        for (int i = 0; i < dimension; i++) {  // Loop through entire grid of n x n
+            for (int j = 0; j < dimension; j++) {
+                int value = backendGrid[i][j];  // get the value
+                int subRow = (int) Math.floor(i/subDimension); // Calculate correspondence to subgrid location x
+                int subCol = (int) Math.floor(j/subDimension); // Calculate correspondence to subgrid location y
+                for (int k = 0; k < dimension; k++) {  // 3d array access
+                    if (finalSubgrid[subRow][subCol][k] == 0) {
+                        finalSubgrid[subRow][subCol][k] += value;
+                        break;
+                    }
+                }
+            }
+        }
+        return finalSubgrid;
     }
 
     /**
@@ -87,7 +214,7 @@ public class SudokuGrid extends GCompound {
      * Adds empty squares to a designated pixel location
      * @param x the horizontal location to place empty square
      * @param y the vertical location to place empty square
-    */
+     */
     private void addEmptySquare(int x, int y) {
         GRect rect = new GRect(SQUARE_DIMENSION, SQUARE_DIMENSION); // Add empty square
         add(rect, x * SQUARE_DIMENSION, y * SQUARE_DIMENSION);
@@ -108,102 +235,6 @@ public class SudokuGrid extends GCompound {
         }
     }
 
-    //TODO: Implement initNumbers
-
-    /**
-     * Initialize this grid with random location, random values. Has to make sure there are no duplicates!
-     * @return backendGrid that values were inserted into
-     */
-    private int[][] initNumbers() {
-        int numberOfValues = dimension * dimension;
-        if (difficulty.equals("easy") | difficulty.equals("e")) {
-            // How many numbers to generate based on difficulty
-            int numbers = (int) Math.ceil(numberOfValues*EASY_MODIFIER);
-            for (int i = 0; i <= numbers; i++) {
-//                backendGrid = generateRandVal();
-                RandomGenerator random = new RandomGenerator();
-                int xRandCoord = random.nextInt(dimension);
-                int yRandCoord = random.nextInt(dimension);
-                int genRandValue = random.nextInt(1, dimension);
-//                System.out.println(eval.checkLocation(yRandCoord, xRandCoord) + " for: " + yRandCoord + ", " + xRandCoord);
-                backendGrid[yRandCoord][xRandCoord] = genRandValue;
-            }
-        } else if (difficulty.equals("med") | (difficulty.equals("medium")) | (difficulty.equals("m"))) {
-            int numbers = (int) Math.ceil(numberOfValues*MED_MODIFIER);
-            for (int i = 0; i <= numbers; i++) {
-//                backendGrid = generateRandVal();
-            }
-        } else if (difficulty.equals("hard") | difficulty.equals("h")) {
-            int numbers = (int) Math.ceil(numberOfValues*HARD_MODIFIER);
-            for (int i = 0; i <= numbers; i++) {
-//                backendGrid = generateRandVal();
-            }
-        }
-        return backendGrid;
-    }
-
-    //TODO: implement test class for this method + others.
-
-    /**
-     * Checks if a value can be placed in a certain row/column/subgrid by checking for duplicates.
-     * @param row it will be placed in.
-     * @param column it will be placed in.
-     * @param value that will be inserted into backend grid.
-     * @return true if no duplicates, false if duplicates were found.
-     */
-    public boolean checkInit(int row, int column, int value) {
-        int[] colArray = new int[dimension+1];
-        int[] rowArray = new int[dimension+1];
-        int[] subArray = new int[dimension+1];
-        rowArray[rowArray.length-1] = value;
-        colArray[colArray.length-1] = value;
-        subArray[subArray.length-1] = value;
-//        SudokuEvaluator eval = new SudokuEvaluator(this);
-
-        for (int c = 0; c < dimension; c++) {
-            rowArray[c] = backendGrid[row][c];
-        }
-        for (int r = 0; r < dimension; r++) {
-            colArray[r] = backendGrid[r][column];
-        }
-        int subgridX = (int) Math.floor(column/subDimension);
-        int subgridY = (int) Math.floor(row/subDimension);
-        for (int s = 0; s < dimension; s++) {
-            subArray = backendSubgrid[subgridY][subgridX];
-        }
-//        boolean checkCol = eval.checkDuplicates(colArray);
-//        boolean checkRow = eval.checkDuplicates(rowArray);
-//        boolean checkSubs = eval.checkDuplicates(subArray);
-//        if (!(checkCol & checkRow & checkSubs)) {
-//            return false;
-//        }
-        return true;
-    }
-
-    /**
-     * Generate the 3d subgrid of this Sudoku grid.
-     * @return 3d Subgrids
-     */
-    public int[][][] generateSubgrids() {
-        int dimension = backendGrid.length;
-        int subDimension = (int) Math.sqrt(dimension);
-        int[][][] finalSubgrid = new int[subDimension][subDimension][dimension];
-        // Add values from grid to subgrid
-        for (int i = 0; i < dimension; i++) {  // Loop through entire grid of n x n
-            for (int j = 0; j < dimension; j++) {
-                int value = backendGrid[i][j];  // get the value
-                int subCol = (int) Math.floor(i/subDimension); // Calculate correspondence to subgrid location x
-                int subRow = (int) Math.floor(j/subDimension); // Calculate correspondence to subgrid location y
-                for (int k = 0; k < dimension; k++) {  // 3d array access
-                    if (finalSubgrid[subRow][subCol][k] == 0) {
-                        finalSubgrid[subRow][subCol][k] += value;
-                        break;
-                    }
-                }
-            }
-        }
-        return finalSubgrid;
-    }
 
     // Getters and setters associated with the SudokuGrid object
     public static int getSQUARE_DIMENSION() {
@@ -235,7 +266,7 @@ public class SudokuGrid extends GCompound {
     }
 
     public int[][][] getBackendSubgrid() {
-        return backendSubgrid;
+        return this.backendSubgrid;
     }
 
     public void setBackendSubgrid(int[][][] backendSubgrid) {
@@ -248,7 +279,7 @@ public class SudokuGrid extends GCompound {
 
     public void setBackendGrids(int[][] backendGrid) {
         this.backendGrid = backendGrid;
-        this.backendSubgrid = generateSubgrids();
+        this.backendSubgrid = generateSubgrid();
     }
 
     public void setDifficulty(String difficulty) {
