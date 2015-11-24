@@ -1,10 +1,8 @@
 import org.junit.Test;
 
-import java.util.Arrays;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
 
 /**
  * Created by Ye on 11/20/2015.
@@ -15,15 +13,14 @@ public class TestSudokuGrid {
     public void testCheckInit() {
         int dimension = 4;
         grid = new SudokuGrid(dimension, "easy");
-        int[][] tempGrid = new int[dimension][dimension];
-        tempGrid[0][0] = 1;
+        int[][] tempGrid = {{1,4,0,0},{2,0,0,0},{0,0,0,0},{0,0,0,0}};
         grid.setBackendGrids(tempGrid);
-        System.out.println("Backend grid: " + Arrays.deepToString(grid.getBackendGrid()));
-        System.out.println("Backend subgrid: " + Arrays.deepToString(grid.getBackendSubgrid()));
 
         //Testing equals and booleans
-        assertEquals(1, tempGrid[0][0]);
-        assertTrue("There are no duplicates in row, column or subgrid.", grid.checkInit(0, 0, 2));
-        assertFalse(grid.checkInit(1, 1, tempGrid[0][0]));
+        String dashes = "-----------------------------------------------------------------";
+        assertTrue("Grid check 1", grid.checkInit(1, 1, 3));
+        System.out.println(dashes);
+        tempGrid[1][1] = 3;
+        assertFalse(grid.checkInit(3, 1, 3));
     }
 }
