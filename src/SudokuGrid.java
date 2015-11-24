@@ -84,8 +84,6 @@ public class SudokuGrid extends GCompound {
         return backendGrid;
     }
 
-    // TODO: New bug--just because it initially doesn't conflict, it can also prevent it from ever being solved.
-    // Todo: find the solution(?) before giving only partial initialization of solution?
     /**
      * Initialize the grid with random values (1 to length) at random locations
      */
