@@ -26,6 +26,11 @@ public class BruteForce {
         this.randomGenerator = new RandomGenerator();
     }
 
+    /**
+     * Populates a 2d array with random values
+     * @param grid
+     * @return 2d array
+     */
     public int[][] implement(int[][] grid){
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid.length; j++){
