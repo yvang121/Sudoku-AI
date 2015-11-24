@@ -21,5 +21,6 @@ public class TestSudokuEvaluator {
         assertFalse("Subgrid 1 = False", evaluator.checkSubgrid(0, 1));
         assertTrue(evaluator1.checker());
         assertFalse(evaluator.checker());
+        assertTrue(evaluator1.checkAllSubgrids());
     }
 }
