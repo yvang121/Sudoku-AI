@@ -14,16 +14,16 @@ public class SudokuEvaluator {
 
     /**
      * Checks the entire grid to see if there are any duplicates in it.
-     * @return true if the checker didn't find any duplicates within the grid.
+     * @return true if no duplicates found within the grid.
      */
     public boolean checker() {
         int dimension = grid.length;
+        boolean checkSubgrids = checkAllSubgrids();
         for (int i = 0; i < dimension; i++) {
+            boolean rows = checkRow(i);
             for (int j = 0; j < dimension; j++) {
                 boolean columns = checkCol(j);
-                boolean rows = checkRow(i);
-                boolean subgrids = checkSubgrid(i, j);
-                if (!(columns & rows & subgrids)) {
+                if (!(columns & rows & checkSubgrids)) {
                     printIncorrect();
                     return false;
                 }
@@ -33,6 +33,28 @@ public class SudokuEvaluator {
         return true;
     }
 
+    public boolean checkAllSubgrids() {
+        for (int i = 0; i < grid.length; i++) {
+            HashSet<Integer> subValues = new HashSet<Integer>();
+            for (int j = 0; j < grid.length; j++) {
+                if (subgrid[i][j] != 0) {
+                    if (subValues.contains(subgrid[i][j])) {
+                        return false;
+                    } else {
+                        subValues.add(subgrid[i][j]);
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks a subgrid for duplicates
+     * @param row of the grid
+     * @param column of the grid
+     * @return true if there are no duplicates in input row and column
+     */
     public boolean checkSubgrid(int row, int column) {
         int subDimension = (int) Math.sqrt(grid.length);
         int[][][] sub3dgrid = generateSubgrids();
@@ -40,6 +62,11 @@ public class SudokuEvaluator {
         return checkDuplicates(subArray);
     }
 
+    /**
+     * Checks a row for duplicates
+     * @param row to be checked
+     * @return true if there are no duplicates in input row
+     */
     public boolean checkRow(int row) {
         int[] rowArray = new int[grid.length];
         for (int i = 0; i < grid.length; i++) {
@@ -50,6 +77,11 @@ public class SudokuEvaluator {
         return checkDuplicates(rowArray);
     }
 
+    /**
+     * Checks a column for duplicates
+     * @param col to be checked
+     * @return true if there are no duplicates in input column
+     */
     public boolean checkCol(int col) {
         int[] colArray = new int[grid.length];
         for (int i = 0; i < grid.length; i++) {
@@ -93,6 +125,10 @@ public class SudokuEvaluator {
         return true;
     }
 
+    /**
+     * Helper function to generate a 3d subgrid for directly translating from grid to subgrid
+     * @return 3d array designating subgrids
+     */
     public int[][][] generateSubgrids() {
         int dimension = grid.length;
         int subDimension = (int) Math.sqrt(dimension);
@@ -114,6 +150,10 @@ public class SudokuEvaluator {
         return finalSubgrid;
     }
 
+    /**
+     * Generate the 2d array subgrid associated with grid
+     * @return 2d array
+     */
     public int[][] generate2dSubgrid() {
         int dimension = grid.length;
         int subDimension = (int)Math.sqrt(dimension);
@@ -141,6 +181,9 @@ public class SudokuEvaluator {
         return subgrid;
     }
 
+    /**
+     * Prints a box stating a solution is incorrect.
+     */
     public void printIncorrect() {
         String incorrect = "|Solution is INCORRECT.|";
         String dashes = "";
@@ -150,6 +193,9 @@ public class SudokuEvaluator {
         System.out.println(dashes + "\n" + incorrect + " => " + Arrays.deepToString(grid) + "\n" + dashes);
     }
 
+    /**
+     * Prints a box stating a solution is correct.
+     */
     public void printCorrect() {
         String correct = "|Solution is CORRECT.|";
         String dashes = "";
