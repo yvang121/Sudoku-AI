@@ -60,13 +60,9 @@ public class SudokuGrid extends GCompound {
      */
     private int[][] initNumbers() {
         int totalNumValues = dimension * dimension;
-        int xRandCoord;
-        int yRandCoord;
-        boolean noDuplicates;
-        int genRandValue;
         if (difficulty.equals("easy") | difficulty.equals("e")) {
             // How many numbers to generate based on difficulty
-            int numbers = (int) Math.ceil(totalNumValues*EASY_MODIFIER);
+            int numbers = (int) Math.floor(totalNumValues*EASY_MODIFIER);
             for (int i = 0; i <= numbers; i++) {
                 initGrid();
             }
