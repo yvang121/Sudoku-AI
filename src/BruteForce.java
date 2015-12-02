@@ -32,14 +32,18 @@ public class BruteForce {
      * @return 2d array
      */
     public int[][] implement(int[][] grid){
-        for(int i = 0; i < grid.length; i++){
-            for(int j = 0; j < grid.length; j++){
+        int[][] tempGrid = new int[grid.length][grid.length];
+        for(int i = 0; i < tempGrid.length; i++){
+            for(int j = 0; j < tempGrid.length; j++){
                 if(grid[i][j] == 0){
-                    grid[i][j] += randomGenerator.nextInt(1, grid.length);
+                    tempGrid[i][j] += randomGenerator.nextInt(1, tempGrid.length);
+                } else {
+                    int clone = grid[i][j];
+                    tempGrid[i][j] = clone;
                 }
             }
         }
-        return grid;
+        return tempGrid;
     }
 
     public RandomGenerator getRandomGenerator() {
