@@ -2,6 +2,7 @@ import java.util.*;
 
 /**
  * Created by Ye on 11/10/2015.
+ * Evaluator class to check 2d arrays for correctness.
  */
 public class SudokuEvaluator {
     int[][] grid;
@@ -44,6 +45,9 @@ public class SudokuEvaluator {
                         subValues.add(subgrid[i][j]);
                     }
                 }
+            }
+            if (subValues.size() != grid.length) {
+                return false;
             }
         }
         return true;
@@ -157,25 +161,25 @@ public class SudokuEvaluator {
     public int[][] generate2dSubgrid() {
         int dimension = grid.length;
         int subDimension = (int)Math.sqrt(dimension);
-        int section = -subDimension;
-        int sectionPos = 0;
+        int subgridSect = -subDimension;
+        int subArrayLoc = 0;
         int[][] subgrid = new int[dimension][dimension];
 
         for (int i = 0; i < dimension; i++) {
             if (i%subDimension == 0){  // if i is divisible by subgrid dimension
-                section += subDimension;  // add subgrid dimension to section (initialized to 0) 2x for 4x4
-                sectionPos = 0;  // reset the section position
+                subgridSect += subDimension;  // add subgrid dimension to section (initialized to 0) 2x for 4x4
+                subArrayLoc = 0;  // reset the section position
             }
             if (i%subDimension != 0){  // else if it's not divisible by subgrid dimension
-                sectionPos += subDimension; // section position increments by subgrid dimension
+                subArrayLoc += subDimension; // section position increments by subgrid dimension
             }
-            int currentSection = section;
+            int currentSection = subgridSect;
             for (int j = 0; j < dimension; j++){
                 if (j%subDimension == 0 && j != 0){  // if j divisible by subgrid dimension
                     // section isn't 0
                     currentSection += 1; // increment
                 }
-                subgrid[currentSection][j % subDimension + sectionPos] = grid[i][j];
+                subgrid[currentSection][j % subDimension + subArrayLoc] = grid[i][j];
             }
         }
         return subgrid;
