@@ -13,7 +13,7 @@ public class SudokuUI extends GraphicsProgram {
      * Main run method to initiate Sudoku AI program
      */
     public void run() {
-        grid = new SudokuGrid(9, "e");
+        grid = new SudokuGrid(4, "e");
         add(grid, 0, 0);
         grid.addNumToUI(grid.getBackendGrid());
 
