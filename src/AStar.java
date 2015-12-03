@@ -19,6 +19,7 @@ public class AStar {
         return false;
     }
 
+    //TODO: Specify a total goal cost(to decrease as we go along). Heuristic can be based on which gives highest jump
     /**
      * Calculates the heuristic cost of a single grid square using the row, column and subgrid
      * @return heuristic value for given row and column.
