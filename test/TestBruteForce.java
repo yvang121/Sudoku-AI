@@ -11,7 +11,7 @@ public class TestBruteForce {
     public void testBruteForce() {
         int numRuns = 0;
         double before = System.currentTimeMillis();
-        while (numRuns < 1000000) {
+        while (numRuns < 1500000) {
             BruteForce bruteForce = new BruteForce();
             int[][] tempGrid = bruteForce.implement(grid.getBackendGrid());
             System.out.println(Arrays.deepToString(grid.getBackendGrid()));
