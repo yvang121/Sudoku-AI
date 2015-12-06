@@ -3,4 +3,4 @@ Sudoku is puzzle that is played on an ```n * n``` subgrid and ```n^2 * n^2``` fu
 
 The Sudoku puzzle is randomly instantiated with a partial assignment of variables into the Sudoku grid. This does not guarantee that the search algorithms will find a solution, however, because it is randomly instantiated in way that although nothing conflicts at first, it may cause the constraint-propagation to fail.
 
-The A* search algorithm, along with the default brute force algorithm was implemented for this AI project.
+The A* search algorithm, along with the default brute force algorithm was implemented for this AI project. We also had to develop our own Sudoku evaluator that returns a boolean on whether or not a search algorithm has successfully found a final goal state.
