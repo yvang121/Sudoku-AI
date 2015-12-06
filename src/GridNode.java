@@ -5,15 +5,16 @@ import com.sun.istack.internal.NotNull;
  * Grid node for the AStar class to utilize.
  */
 public class GridNode implements Comparable<GridNode> {
-    int heuristic;
-    int column;
-    int row;
-    GridNode parent;
+    private int heuristic;
+    private int column;
+    private int row;
+    private GridNode parent;
 
-    public GridNode(int row, int col, int heuristic) {
+    public GridNode(int row, int col, int heuristic, GridNode parent) {
         this.column = col;
         this.row = row;
         this.heuristic = heuristic;
+        this.parent = parent;
     }
 
     @Override
