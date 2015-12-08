@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.PriorityQueue;
 
 /**
@@ -21,7 +20,7 @@ public class AStar {
         boolean solution = false;
         HashSet<GridNode> visited = new HashSet<GridNode>(); // coords that have been visited already + expanded
         PriorityQueue<GridNode> fringe = new PriorityQueue<GridNode>(); // frontier coords that have yet to be visited
-        GridNode startNode = new GridNode(0, 0, calcHeuristic(), null);  // create start node object
+        GridNode startNode = new GridNode(0, 0, calcHeuristic(0, 0), null);  // create start node object
         fringe.add(startNode);  // add start node to priority queue
         while (!solution | !fringe.isEmpty()) {  // while the solution is false or fringe set is not empty:
             GridNode visitNode = fringe.poll();  // poll from priority queue
@@ -41,8 +40,10 @@ public class AStar {
      * Calculates the heuristic cost of a single grid square using the row, column and subgrid
      * @return heuristic value for given row and column.
      */
-    public int calcHeuristic() {
+    public int calcHeuristic(int row, int col) {
         //TODO: implement the heuristic calculator
+        // For the current cell, identify its row, col and subgrid. Pick list that has MRV. If all =, pick randomly
+        // MRV(Minimum remaining value). Of the MRVs, if m>1, pick randomly, else pick that value.
         return 0;
     }
 
@@ -62,14 +63,16 @@ public class AStar {
             if (neighborRow >= 0 & neighborRow < grid.length) {
                 int neighborVal = grid[neighborRow][currNode.getColumn()];
                 if (neighborVal == 0) {
-                    GridNode newNode = new GridNode(neighborRow, currNode.getColumn(), calcHeuristic(), currNode);
+                    GridNode newNode = new GridNode(neighborRow, currNode.getColumn(),
+                            calcHeuristic(neighborRow, currNode.getColumn()), currNode);
                     nodes.add(newNode);
                 }
             }
-            if (neighborCol >= 0 & neighborRow < grid.length) {
+            if (neighborCol >= 0 & neighborCol < grid.length) {
                 int neighborVal = grid[currNode.getRow()][neighborCol];
                 if (neighborVal == 0) {
-                    GridNode newNode = new GridNode(currNode.getRow(), neighborCol, calcHeuristic(), currNode);
+                    GridNode newNode = new GridNode(currNode.getRow(), neighborCol,
+                            calcHeuristic(currNode.getRow(), neighborCol), currNode);
                     nodes.add(newNode);
                 }
             }
