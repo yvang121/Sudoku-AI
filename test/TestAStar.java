@@ -3,6 +3,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
+import static junit.framework.TestCase.assertEquals;
+
 /**
  * Created by Ye-Vang on 12/6/2015.
  */
@@ -12,9 +14,9 @@ public class TestAStar {
     public void testAStar() {
         aStar = new AStar();
         PriorityQueue<GridNode> fringe = new PriorityQueue<GridNode>();
-        GridNode node = new GridNode(1, 1, aStar.calcHeuristic(), null);
-        int[][] grid = {{0,4,0,0}, {2,1,3,0},{0,0,0,0},{0,0,0,0}};
+        GridNode node = new GridNode(1, 1, aStar.calcHeuristic(1, 1), null);
+        int[][] grid = {{0,4,0,0}, {0,1,0,0},{0,0,0,0},{0,0,0,0}};
         ArrayList<GridNode> neighbors = aStar.generateNeighbors(grid, node);
-        System.out.println(fringe.size());
+        assertEquals(3, neighbors.size());
     }
 }
