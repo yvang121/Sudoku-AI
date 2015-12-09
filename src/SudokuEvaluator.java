@@ -5,8 +5,8 @@ import java.util.*;
  * Evaluator class to check 2d arrays for correctness.
  */
 public class SudokuEvaluator {
-    int[][] grid;
-    int[][] subgrid;
+    private int[][] grid;
+    private int[][] subgrid;
 
     public SudokuEvaluator(int[][] grid) {
         this.grid = grid;
