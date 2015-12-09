@@ -2,9 +2,9 @@
  * Created by Kenny Bello on 12/7/2015.
  */
 public class Backtrack {
-    int[][] grid;
-    int sqRoot;
-    int count;
+    private int[][] grid;
+    private int sqRoot;
+    private int count;
 
     public Backtrack(int[][] grid){
         this.grid = grid;
