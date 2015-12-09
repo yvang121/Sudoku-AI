@@ -29,7 +29,7 @@ public class Backtrack {
                     grid[row][col] = 0;
                 }
             }
-        }else return true;
+        } else return true;
 
         return false;
     }
@@ -52,7 +52,7 @@ public class Backtrack {
      * @return true if there isn't an occurrence of num in column
      */
     public boolean checkCol(int col, int num){
-        for (int i=0; i<grid.length; i++){
+        for (int i = 0; i < grid.length; i++){
             if (grid[i][col] == num){
                 return false;
             }
@@ -67,7 +67,7 @@ public class Backtrack {
      * @return true if there isn't an occurrence of num in row
      */
     public boolean checkRow(int row, int num){
-        for(int j = 0; j<grid.length; j++){
+        for(int j = 0; j < grid.length; j++){
             if (grid[row][j] == num){
                 return false;
             }
@@ -83,12 +83,12 @@ public class Backtrack {
      * @return true if num does not occur in section
      */
     public boolean checkSect(int row, int col, int num){
-        row = row-(row%sqRoot);
-        col = col-(col%sqRoot);
+        row = row - (row%sqRoot);
+        col = col - (col%sqRoot);
 
-        for(int i = 0; i<sqRoot; i++){
-            for(int j = 0; j<sqRoot; j++){
-                if(grid[row+i][col+j] == num){
+        for(int i = 0; i < sqRoot; i++){
+            for(int j = 0; j < sqRoot; j++){
+                if(grid[row + i][col + j] == num){
                     return false;
                 }
             }
@@ -102,8 +102,8 @@ public class Backtrack {
      */
     public int[] findEmpty(){
         int[] empty = new int[2];
-        for (int i=0; i<grid.length; i++){
-            for (int j=0; j<grid.length; j++){
+        for (int i = 0; i < grid.length; i++){
+            for (int j = 0; j < grid.length; j++){
                 if(grid[i][j] == 0){
                     empty[0] = i;
                     empty[1] = j;
@@ -112,5 +112,21 @@ public class Backtrack {
             }
         }
         return null;
+    }
+
+    public int[][] getGrid() {
+        return grid;
+    }
+
+    public int getSqRoot() {
+        return sqRoot;
+    }
+
+    public void setGrid(int[][] grid) {
+        this.grid = grid;
+    }
+
+    public void setSqRoot(int sqRoot) {
+        this.sqRoot = sqRoot;
     }
 }
