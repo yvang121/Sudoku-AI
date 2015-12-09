@@ -4,10 +4,12 @@
 public class Backtrack {
     int[][] grid;
     int sqRoot;
+    int count;
 
     public Backtrack(int[][] grid){
         this.grid = grid;
-        sqRoot = (int) Math.sqrt(grid.length);
+        this.sqRoot = (int) Math.sqrt(grid.length);
+        this.count = initialFill();
     }
 
     /**
@@ -16,22 +18,44 @@ public class Backtrack {
      */
     public boolean implement(){
         int[] coords = findEmpty();
+        if (count == grid.length*grid.length) {
+            return true; // Base case: if everything in the grid is filled, break.
+        }
         if (coords != null) {
-            int row = coords[1];
-            int col = coords[0];
+            int row = coords[0];
+            int col = coords[1];
 
             for (int i = 1; i <= grid.length; i++) {
                 if (isOk(row, col, i)) {
                     grid[row][col] = i;
                     if (implement()) {
+                        count++; // Used for base case. Counts number of filled init values + # of values implemented
+                        System.out.println("Added " + i + " to cell: (" + row + ", " + col + ")");
                         return true;
                     }
                     grid[row][col] = 0;
                 }
             }
-        } else return true;
-
+        } else {
+            return true;
+        }
         return false;
+    }
+
+    /**
+     * Counts the initial values initialized in the grid.
+     * @return a count of the number of initial values.
+     */
+    public int initialFill() {
+        int count = 0;
+        for (int[] values : grid) {
+            for (int value : values) {
+                if (value != 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     /**
@@ -102,8 +126,8 @@ public class Backtrack {
      */
     public int[] findEmpty(){
         int[] empty = new int[2];
-        for (int i = 0; i < grid.length; i++){
-            for (int j = 0; j < grid.length; j++){
+        for (int i = grid.length-1; i >= 0; i--){
+            for (int j = grid.length-1; j >= 0; j--){
                 if(grid[i][j] == 0){
                     empty[0] = i;
                     empty[1] = j;
