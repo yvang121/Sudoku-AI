@@ -1,6 +1,5 @@
 import acm.program.GraphicsProgram;
 
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 
 /**
@@ -15,20 +14,23 @@ public class SudokuUI extends GraphicsProgram {
     public void init() {
         addKeyListeners();
     }
+
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            pause(100);
+            System.exit(0);
+        }
+    }
     /**
      * Main run method to initiate Sudoku AI program
      */
     public void run() {
-        grid = new SudokuGrid(9, "e");
+        grid = new SudokuGrid(4, "easy");
         add(grid, 0, 0);
         Backtrack backtracker = new Backtrack(grid.getBackendGrid());
         boolean implemented = backtracker.implement();
-        if (!implemented) {
-            JOptionPane.showMessageDialog(null, "Unable to find a solution.",
-                    "No Solution", JOptionPane.ERROR_MESSAGE);
-            pause(500);
-            exit();
-        }
+        SudokuEvaluator eval = new SudokuEvaluator(grid.getBackendGrid());
+        eval.evaluate();
         grid.addNumToUI(grid.getBackendGrid());
 //        petList = new JComboBox(petStrings);
 //        add(petList);
@@ -37,10 +39,4 @@ public class SudokuUI extends GraphicsProgram {
 
     }
 
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            pause(100);
-            System.exit(0);
-        }
-    }
 }
