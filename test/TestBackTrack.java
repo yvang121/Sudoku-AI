@@ -1,5 +1,8 @@
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 /**
  * Created by Ye on 12/8/2015.
  */
@@ -7,11 +10,11 @@ public class TestBackTrack {
     Backtrack backtracker;
     @Test
     public void testBacktrack() {
-        SudokuGrid grid = new SudokuGrid(4, "e");
-        backtracker = new Backtrack(grid.getBackendGrid());
+        int[][] grid = {{1, 0, 0,0},{0,0,0,0},{0,0,0,0},{1,0,0,0}};
+        backtracker = new Backtrack(grid);
         int count = backtracker.initialFill();
-        System.out.println(count);
         boolean implement = backtracker.implement();
-        System.out.println(implement);
+        assertEquals(2, count);
+        assertFalse(implement);
     }
 }

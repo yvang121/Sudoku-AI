@@ -18,9 +18,6 @@ public class Backtrack {
      */
     public boolean implement(){
         int[] coords = findEmpty();
-//        if (count == grid.length*grid.length) {
-//            return true; // Base case: if everything in the grid is filled, break.
-//        }
         if (coords != null) {
             int row = coords[0];
             int col = coords[1];
@@ -28,7 +25,6 @@ public class Backtrack {
             for (int i = 1; i <= grid.length; i++) {
                 if (isOk(row, col, i)) {
                     grid[row][col] = i;
-                    System.out.println(row+" "+col);
                     if (implement()) {
                         count++; // Used for base case. Counts number of filled init values + # of values implemented
                         System.out.println("Added " + i + " to cell: (" + row + ", " + col + ")");
@@ -40,7 +36,6 @@ public class Backtrack {
         } else {
             return true;
         }
-        System.out.println("Failed!");
         return false;
     }
 

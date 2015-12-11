@@ -29,7 +29,7 @@ public class AStar {
             // place value into visitNode's location on backend grid based on constraints
             // add this node into the visited hash set. should only visit every cell in grid once, hence the set
             evaluator = new SudokuEvaluator(grid);
-            solution = evaluator.checker();
+            solution = evaluator.evaluate();
         }
 //        if ()
         return false;
