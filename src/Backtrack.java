@@ -18,9 +18,6 @@ public class Backtrack {
      */
     public boolean implement(){
         int[] coords = findEmpty();
-        if (count == grid.length*grid.length) {
-            return true; // Base case: if everything in the grid is filled, break.
-        }
         if (coords != null) {
             int row = coords[0];
             int col = coords[1];
