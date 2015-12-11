@@ -19,6 +19,7 @@ public class SudokuEvaluator {
      */
     public boolean checker() {
         int dimension = grid.length;
+        System.out.println(Arrays.deepToString(subgrid));
         boolean checkSubgrids = checkAllSubgrids();
         for (int i = 0; i < dimension; i++) {
             boolean rows = checkRow(i);
@@ -108,6 +109,7 @@ public class SudokuEvaluator {
                 return false;
             } else if (val != 0 & !numbers.contains(val)) {
                 numbers.add(val);
+
             }
         }
         return true;

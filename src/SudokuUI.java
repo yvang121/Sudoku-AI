@@ -23,6 +23,8 @@ public class SudokuUI extends GraphicsProgram {
         add(grid, 0, 0);
         Backtrack backtracker = new Backtrack(grid.getBackendGrid());
         boolean implemented = backtracker.implement();
+        SudokuEvaluator se = new SudokuEvaluator(backtracker.getGrid());
+        se.checker();
         if (!implemented) {
             JOptionPane.showMessageDialog(null, "Unable to find a solution.",
                     "No Solution", JOptionPane.ERROR_MESSAGE);
