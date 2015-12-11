@@ -4,7 +4,7 @@ import java.awt.*;
 /**
  * Created by Ye on 12/10/2015.
  */
-public class SudokuCell extends JPanel {
+public class SudokuCell extends JLabel {
     int digit; //the number it would display
     int x, y; //the x,y position on the grid
 
