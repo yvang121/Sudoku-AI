@@ -59,7 +59,6 @@ public class SudokuGUI extends JFrame {
                 panel.remove(sudokuGridPanel);
                 sudokuGridPanel = new SudokuGridPanel(gridDimension);
                 panel.add(sudokuGridPanel, cons);
-                panel.revalidate();
                 pack();
                 System.out.println("Dimension entered: " + gridDimension);
             }
