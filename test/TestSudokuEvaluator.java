@@ -19,8 +19,8 @@ public class TestSudokuEvaluator {
         assertTrue("Column 0 = True", evaluator.checkCol(0));
         assertFalse("Row 1 = False", evaluator.checkRow(1));
         assertFalse("Subgrid 1 = False", evaluator.checkSubgrid(0, 1));
-        assertTrue(evaluator1.checker());
-        assertFalse(evaluator.checker());
+        assertTrue(evaluator1.evaluate());
+        assertFalse(evaluator.evaluate());
         assertTrue(evaluator1.checkAllSubgrids());
     }
 }

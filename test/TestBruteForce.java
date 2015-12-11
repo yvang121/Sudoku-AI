@@ -17,7 +17,7 @@ public class TestBruteForce {
             System.out.println(Arrays.deepToString(grid.getBackendGrid()));
             SudokuEvaluator gridCheck = new SudokuEvaluator(tempGrid);
             numRuns++;
-            if (gridCheck.checker()) {
+            if (gridCheck.evaluate()) {
                 break;
             }
         }
