@@ -22,7 +22,7 @@ public class SudokuGridPanel extends JPanel {
             }
         }
         // Add a black border around everything
-//        setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.black));
+        setBorder(BorderFactory.createMatteBorder(1,1,1,1, Color.black));
     }
 }
 
