@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -197,9 +198,8 @@ public class SudokuEvaluator {
             dashes += '-';
         }
         System.out.println(dashes + "\n" + incorrect + " => " + Arrays.deepToString(grid) + "\n" + dashes);
-//        JOptionPane.showMessageDialog(null, "Unable to find a solution.",
-//                "No Solution", JOptionPane.ERROR_MESSAGE);
-//        System.exit(0);
+        JOptionPane.showMessageDialog(null, "Unable to find a solution.",
+                "No Solution", JOptionPane.ERROR_MESSAGE);
     }
 
     /**
