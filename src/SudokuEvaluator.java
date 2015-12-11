@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Ye on 11/10/2015.
@@ -17,7 +19,7 @@ public class SudokuEvaluator {
      * Checks the entire grid to see if there are any duplicates in it.
      * @return true if no duplicates found within the grid.
      */
-    public boolean checker() {
+    public boolean evaluate() {
         int dimension = grid.length;
         boolean checkSubgrids = checkAllSubgrids();
         for (int i = 0; i < dimension; i++) {
@@ -195,6 +197,9 @@ public class SudokuEvaluator {
             dashes += '-';
         }
         System.out.println(dashes + "\n" + incorrect + " => " + Arrays.deepToString(grid) + "\n" + dashes);
+//        JOptionPane.showMessageDialog(null, "Unable to find a solution.",
+//                "No Solution", JOptionPane.ERROR_MESSAGE);
+//        System.exit(0);
     }
 
     /**
