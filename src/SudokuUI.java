@@ -5,7 +5,8 @@ import java.awt.event.KeyEvent;
 /**
  * Created by Ye on 10/21/2015.
  */
-public class SudokuUI extends GraphicsProgram {
+public class SudokuUI extends GraphicsProgram{
+
     private SudokuGrid grid;
 //    private String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
 //    JComboBox petList;
@@ -28,9 +29,14 @@ public class SudokuUI extends GraphicsProgram {
         grid = new SudokuGrid(4, "easy");
         add(grid, 0, 0);
         Backtrack backtracker = new Backtrack(grid.getBackendGrid());
-        boolean implemented = backtracker.implement();
+        Constraint constraint = new Constraint(grid.getBackendGrid());
+        double before = System.currentTimeMillis();
+        //boolean implemented = backtracker.implement();
+        boolean implemented = constraint.implement();
         SudokuEvaluator eval = new SudokuEvaluator(grid.getBackendGrid());
         eval.evaluate();
+        double after = System.currentTimeMillis();
+        System.out.print(after - before);
         grid.addNumToUI(grid.getBackendGrid());
 //        petList = new JComboBox(petStrings);
 //        add(petList);

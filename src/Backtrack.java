@@ -108,10 +108,8 @@ public class Backtrack {
         col = col - (col%sqRoot);
 
         for(int i = 0; i < sqRoot; i++){
-            for(int j = 0; j < sqRoot; j++){
-                if(grid[row + i][col + j] == num){
+            if(grid[row + i][col + i%3] == num){
                     return false;
-                }
             }
         }
         return true;
