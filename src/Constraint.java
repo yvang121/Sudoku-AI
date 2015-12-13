@@ -91,8 +91,8 @@ public class Constraint {
         row = row - (row%sqRoot);
         col = col - (col%sqRoot);
 
-        for(int i = 0; i < sqRoot; i++){
-            if(grid[row + i/3][col + i%3] == num){
+        for(int i = 0; i < grid.length; i++){
+            if(grid[row + i/sqRoot][col + i%sqRoot] == num){
                 return false;
             }
         }
