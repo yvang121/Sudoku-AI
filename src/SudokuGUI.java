@@ -102,6 +102,7 @@ public class SudokuGUI extends JFrame {
                             int numRuns = 0;
                             double before = System.currentTimeMillis();
                             boolean solved;
+                            panel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             while (numRuns <= 10000000) {
                                 BruteForce bruteForce = new BruteForce();
                                 int[][] tempGrid = bruteForce.implement(grid);
@@ -117,6 +118,7 @@ public class SudokuGUI extends JFrame {
                             }
                             double end = System.currentTimeMillis();
                             double time = (end - before)/1000;
+                            panel.setCursor(Cursor.getDefaultCursor());
                             JOptionPane.showMessageDialog(null, "Time taken: " + time + " seconds; Runs taken: " + numRuns,
                                     "Notification", JOptionPane.INFORMATION_MESSAGE);
                             break;
@@ -125,6 +127,7 @@ public class SudokuGUI extends JFrame {
                             Backtrack backtrack = new Backtrack(grid);
                             boolean solved0;
                             double before0 = System.currentTimeMillis();
+                            panel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             backtrack.implement();
                             SudokuEvaluator checker = new SudokuEvaluator(grid);
                             solved0 = checker.evaluate();
@@ -141,12 +144,14 @@ public class SudokuGUI extends JFrame {
                                 JOptionPane.showMessageDialog(null, "Unable to find a solution.",
                                         "No Solution", JOptionPane.ERROR_MESSAGE);
                             }
+                            panel.setCursor(Cursor.getDefaultCursor());
                             break;
                         case ("Constraint"):
                             grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
                             Constraint constraint = new Constraint(grid);
                             boolean solved1;
                             double before1 = System.currentTimeMillis();
+                            panel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             constraint.implement();
                             SudokuEvaluator ch = new SudokuEvaluator(grid);
                             solved1 = ch.evaluate();
@@ -163,6 +168,7 @@ public class SudokuGUI extends JFrame {
                                 JOptionPane.showMessageDialog(null, "Unable to find a solution.",
                                         "No Solution", JOptionPane.ERROR_MESSAGE);
                             }
+                            panel.setCursor(Cursor.getDefaultCursor());
                             break;
                     }
                 } catch (NullPointerException | ArithmeticException | ArrayIndexOutOfBoundsException ex) {
