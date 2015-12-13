@@ -139,7 +139,8 @@ public class SudokuGUI extends JFrame {
                                 fillJPanel(grid, sudokuGridPanel, c);
                                 JOptionPane.showMessageDialog(null, "Unable to find a solution.",
                                         "No Solution", JOptionPane.ERROR_MESSAGE);
-                            }break;
+                            }
+                            break;
                         case ("Constraint"):
                             grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
                             Constraint constraint = new Constraint(grid);
