@@ -7,10 +7,7 @@ import acm.util.RandomGenerator;
 /**
  * Created by Ye-Vang on 10/21/2015.
  */
-public class SudokuGrid extends GCompound {
-    private static final int SQUARE_DIMENSION = 40;
-    private static final int X_COORDINATE = 17;
-    private static final int Y_COORDINATE = 25;
+public class SudokuGrid {
     private static final double EASY_MODIFIER = 0.20;
     private static final double MED_MODIFIER = 0.15;
     private static final double HARD_MODIFIER = 0.10;
@@ -41,17 +38,8 @@ public class SudokuGrid extends GCompound {
                 e.printStackTrace();
                 System.exit(-1);
             }
-        } else {
-            for (int row = 0; row < dimension; row++) { // Generate the grid
-                for (int column = 0; column < dimension; column++) {
-                    addEmptySquare(row, column);
-                }
-            }
-            addDividers();
-            addBorders();
-            initNumbers();
-            addNumToUI(backendGrid);
         }
+        initNumbers();
     }
 
     /**
@@ -85,12 +73,10 @@ public class SudokuGrid extends GCompound {
      */
     public void initGrid() {
         boolean noDuplicates;
-        boolean collision;
         RandomGenerator random = new RandomGenerator();
         int xRandCoord = random.nextInt(dimension);  // generate a random integer for x position
         int yRandCoord = random.nextInt(dimension);  // generate random integer for y position
         int genRandValue = random.nextInt(1, dimension);  // generate random value for (y, x) grid pos
-//        System.out.println("Initial y and x: " + "(" + yRandCoord + ", " + xRandCoord + ")");
         noDuplicates = checkInit(yRandCoord, xRandCoord, genRandValue);
         while (!noDuplicates || backendGrid[yRandCoord][xRandCoord] != 0) {
             // Check to see if placing randomly gen'd value conflicts with same value in another row/col/subgrid
@@ -100,11 +86,7 @@ public class SudokuGrid extends GCompound {
             yRandCoord = newRandGen.nextInt(dimension);
             genRandValue = newRandGen.nextInt(1, dimension);
             noDuplicates = checkInit(yRandCoord, xRandCoord, genRandValue);
-//            collision = backendGrid[yRandCoord][xRandCoord] != 0;
-//            System.out.println("Collision: " + collision);
         }
-//        System.out.println("Result y and x: " + "(" + yRandCoord + ", " + xRandCoord + ")" +
-//                " Value inserted: " + genRandValue + "\n");
         backendGrid[yRandCoord][xRandCoord] = genRandValue;
         backendSubgrid = generateSubgrid();
     }
@@ -136,17 +118,6 @@ public class SudokuGrid extends GCompound {
         boolean checkCol = eval.checkDuplicates(colArray);
         boolean checkRow = eval.checkDuplicates(rowArray);
         boolean checkSubs = eval.checkDuplicates(subArray);
-//        String dashes = "-----------------------------------------------------------------";
-//        System.out.println(dashes);
-//        System.out.println("Grid: " + Arrays.deepToString(backendGrid));
-//        System.out.println("Subgrid: " + Arrays.deepToString(eval.getSubgrid()));
-//        System.out.println("Transferred row " + row +
-//                ", value to insert: " + value + " " + Arrays.toString(rowArray));
-//        System.out.println("Transferred column " + column +
-//                ", value to insert: " + value + " " + Arrays.toString(colArray));
-//        System.out.println("Transferred subgrid: " + Arrays.toString(subArray));
-//        System.out.println("Initialize status: " + (checkCol & checkRow & checkSubs) + "\n" +
-//                dashes);
         return checkCol & checkRow & checkSubs;
     }
 
@@ -175,66 +146,7 @@ public class SudokuGrid extends GCompound {
         return finalSubgrid;
     }
 
-    /**
-     * Adds exterior borders around the Sudoku Grid object.
-     */
-    private void addBorders() {
-        int lengthOfLine = dimension * SQUARE_DIMENSION;
-        GLine topXLine = new GLine(0, 1, lengthOfLine, 1); // Offset the line to make it look 'bolder'
-        add(topXLine);
-        GLine leftYLine = new GLine(1, 0, 1, lengthOfLine);
-        add(leftYLine);
-        GLine rightYLine = new GLine(lengthOfLine - 1, 0, lengthOfLine - 1, lengthOfLine);
-        add(rightYLine);
-        GLine bottomXLine = new GLine(0, lengthOfLine - 1, lengthOfLine, lengthOfLine - 1);
-        add(bottomXLine);
-    }
-
-    /**
-     * Adds dividers to clearly indicate subgrids in the Sudoku Grid
-     */
-    private void addDividers() {
-        int divisor = (int) Math.sqrt(dimension); // How many divisors we're going to have
-        for (int i = 1; i < divisor; i++) { // From 1 til max divisors:
-            int dividerLine = i * divisor * SQUARE_DIMENSION; // Placement of divisor line
-            GLine xBoldLine = new GLine(dividerLine + 1, 0, dividerLine + 1, dimension * SQUARE_DIMENSION);
-            add(xBoldLine); // Adding line to GCompound
-            GLine yBoldLine = new GLine(0, dividerLine + 1, dimension * SQUARE_DIMENSION, dividerLine + 1);
-            add(yBoldLine);
-        }
-    }
-
-    /**
-     * Adds empty squares to a designated pixel location
-     * @param x the horizontal location to place empty square
-     * @param y the vertical location to place empty square
-     */
-    private void addEmptySquare(int x, int y) {
-        GRect rect = new GRect(SQUARE_DIMENSION, SQUARE_DIMENSION); // Add empty square
-        add(rect, x * SQUARE_DIMENSION, y * SQUARE_DIMENSION);
-    }
-
-    /**
-     * Adds number values to the grid interface.
-     * @param backendGrid 2d array to read from and put onto graphical user interface.
-     */
-    public void addNumToUI(int[][] backendGrid) {
-        for (int i = 0; i < backendGrid.length; i++) {
-            for (int j = 0; j < backendGrid.length; j++) {
-                if (backendGrid[i][j] != 0) {
-                    GLabel numberLabel = new GLabel(Integer.toString(backendGrid[i][j]));
-                    add(numberLabel, X_COORDINATE + i * SQUARE_DIMENSION, Y_COORDINATE + j * SQUARE_DIMENSION);
-                }
-            }
-        }
-    }
-
-
     // Getters and setters associated with the SudokuGrid object
-    public static int getSQUARE_DIMENSION() {
-        return SQUARE_DIMENSION;
-    }
-
     public int getDimension() {
         return dimension;
     }
