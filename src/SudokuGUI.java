@@ -95,6 +95,7 @@ public class SudokuGUI extends JFrame {
             public void actionPerformed( ActionEvent e ) {
                 GridBagConstraints c = new GridBagConstraints();
                 try {
+                    System.out.println("Running...");
                     switch (algorithm) {
                         case ("Brute Force"):
                             grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
