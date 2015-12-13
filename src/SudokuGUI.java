@@ -117,7 +117,7 @@ public class SudokuGUI extends JFrame {
                             }
                             double end = System.currentTimeMillis();
                             double time = (end - before)/1000;
-                            JOptionPane.showMessageDialog(null, "Time taken: " + time + "; Runs take: " + numRuns,
+                            JOptionPane.showMessageDialog(null, "Time taken: " + time + "seconds; Runs taken: " + numRuns,
                                     "Notification", JOptionPane.INFORMATION_MESSAGE);
                             break;
                         case ("Backtrack"):
