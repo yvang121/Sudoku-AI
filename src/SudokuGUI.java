@@ -110,14 +110,14 @@ public class SudokuGUI extends JFrame {
                                 if (solved) {
                                     panel.remove(sudokuGridPanel);
                                     sudokuGridPanel = new SudokuGridPanel(gridDimension);
-                                    fillJPanel(grid, sudokuGridPanel, c);
+                                    fillJPanel(tempGrid, sudokuGridPanel, c);
                                     break;
                                 }
                                 numRuns++;
                             }
                             double end = System.currentTimeMillis();
                             double time = (end - before)/1000;
-                            JOptionPane.showMessageDialog(null, "Time taken: " + time + "seconds; Runs taken: " + numRuns,
+                            JOptionPane.showMessageDialog(null, "Time taken: " + time + " seconds; Runs taken: " + numRuns,
                                     "Notification", JOptionPane.INFORMATION_MESSAGE);
                             break;
                         case ("Backtrack"):
