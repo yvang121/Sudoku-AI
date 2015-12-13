@@ -21,14 +21,6 @@ public class SudokuGridPanel extends JPanel {
                 add(new SudokuCell(i, j), constraints);
             }
         }
-        int divisor = (int) Math.sqrt(dimension); // How many divisors we're going to have
-        for (int i = 1; i < divisor; i++) { // From 1 til max divisors:
-            int dividerLine = i * divisor * SudokuCell.getSquareDimension(); // Placement of divisor line
-
-        }
-        constraints.gridx = 3;
-        constraints.gridy = 0;
-        constraints.gridheight = 10;
         // Add a black border around everything
         setBorder(BorderFactory.createMatteBorder(1,1,1,1, Color.black));
     }

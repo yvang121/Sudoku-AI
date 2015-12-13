@@ -6,7 +6,6 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
     <list default="true" id="452494fa-d04a-406e-9346-41674b5d28a8" name="Default" comment="Added Constraint Algorithm">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Constraint.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Sudoku-AI/AStar.class" afterPath="$PROJECT_DIR$/out/production/Sudoku-AI/AStar.class" />
@@ -18,11 +17,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SudokuUI.java" afterPath="$PROJECT_DIR$/src/SudokuUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-=======
-    <list default="true" id="452494fa-d04a-406e-9346-41674b5d28a8" name="Default" comment="Connected the backend grid to the coordinate grid in the graphics interface.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SudokuCell.java" afterPath="$PROJECT_DIR$/src/SudokuCell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SudokuGridPanel.java" afterPath="$PROJECT_DIR$/src/SudokuGridPanel.java" />
->>>>>>> Stashed changes
     </list>
     <ignored path="Sudoku-AI.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,7 +39,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-<<<<<<< Updated upstream
       <file leaf-file-name="SudokuUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SudokuUI.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -65,13 +58,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="204" column="5" selection-start-line="204" selection-start-column="5" selection-end-line="204" selection-end-column="5" />
-=======
-      <file leaf-file-name="SudokuGrid.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SudokuGrid.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3241" max-vertical-offset="4471">
-              <caret line="190" column="5" selection-start-line="190" selection-start-column="5" selection-end-line="190" selection-end-column="5" />
->>>>>>> Stashed changes
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#setBackendGrids#0;class#SudokuGrid#0" expanded="false" />
@@ -124,16 +110,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SudokuGridPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SudokuGridPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SudokuGridPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< Updated upstream
             <state vertical-scroll-proportion="0.0">
               <caret line="24" column="57" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="57" />
-=======
-            <state vertical-scroll-proportion="0.67830426" vertical-offset="170" max-vertical-offset="714">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
->>>>>>> Stashed changes
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -141,7 +122,6 @@
           </provider>
         </entry>
       </file>
-<<<<<<< Updated upstream
       <file leaf-file-name="GridNode.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GridNode.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -157,23 +137,8 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-=======
-      <file leaf-file-name="SudokuCell.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SudokuCell.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
-              <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
->>>>>>> Stashed changes
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#909#910#0" expanded="true" />
-                <element signature="e#933#934#0" expanded="true" />
-                <element signature="e#972#973#0" expanded="true" />
-                <element signature="e#996#997#0" expanded="true" />
-                <element signature="e#1027#1028#0" expanded="true" />
-                <element signature="e#1053#1054#0" expanded="true" />
-                <element signature="e#1084#1085#0" expanded="true" />
-                <element signature="e#1110#1111#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -237,16 +202,12 @@
         <option value="$PROJECT_DIR$/src/SudokuCellPanel.java" />
         <option value="$PROJECT_DIR$/src/SudokuGrid.java" />
         <option value="$PROJECT_DIR$/src/SudokuGUI.java" />
-        <option value="$PROJECT_DIR$/src/Sudoku1.java" />
         <option value="$PROJECT_DIR$/src/SudokuCell.java" />
         <option value="$PROJECT_DIR$/src/SudokuGridPanel.java" />
-<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/src/Sudoku1.java" />
         <option value="$PROJECT_DIR$/src/Backtrack.java" />
         <option value="$PROJECT_DIR$/src/SudokuUI.java" />
         <option value="$PROJECT_DIR$/src/Constraint.java" />
-=======
->>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -331,20 +292,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Sudoku-AI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sudoku-AI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sudoku-AI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -757,12 +704,8 @@
       <workItem from="1449641420582" duration="645000" />
       <workItem from="1449682021081" duration="2492000" />
       <workItem from="1449697597660" duration="3267000" />
-<<<<<<< Updated upstream
       <workItem from="1449778770163" duration="23890000" />
       <workItem from="1449874997270" duration="11366000" />
-=======
-      <workItem from="1449778770163" duration="24577000" />
->>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00001" summary="SudokuEval implemented">
       <created>1447284326670</created>
@@ -1056,11 +999,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="111916000" />
-=======
-    <option name="totallyTimeSpent" value="101237000" />
->>>>>>> Stashed changes
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1644,17 +1583,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SudokuUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73913044" vertical-offset="272" max-vertical-offset="697">
-          <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#keyPressed#0;class#SudokuUI#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SudokuGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1675,7 +1603,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/src/SudokuUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1684,52 +1611,15 @@
             <element signature="imports" expanded="true" />
             <element signature="e#372#373#0" expanded="true" />
             <element signature="e#405#406#0" expanded="true" />
-=======
-    <entry file="file://$PROJECT_DIR$/src/SudokuGrid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3241" max-vertical-offset="4471">
-          <caret line="190" column="5" selection-start-line="190" selection-start-column="5" selection-end-line="190" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#setBackendGrids#0;class#SudokuGrid#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SudokuCell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
-          <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#909#910#0" expanded="true" />
-            <element signature="e#933#934#0" expanded="true" />
-            <element signature="e#972#973#0" expanded="true" />
-            <element signature="e#996#997#0" expanded="true" />
-            <element signature="e#1027#1028#0" expanded="true" />
-            <element signature="e#1053#1054#0" expanded="true" />
-            <element signature="e#1084#1085#0" expanded="true" />
-            <element signature="e#1110#1111#0" expanded="true" />
->>>>>>> Stashed changes
-          </folding>
-        </state>
-      </provider>
-    </entry>
-<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/src/Constraint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="81" column="8" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="8" />
           <folding />
-=======
-    <entry file="file://$PROJECT_DIR$/src/SudokuGridPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67830426" vertical-offset="170" max-vertical-offset="714">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
->>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
