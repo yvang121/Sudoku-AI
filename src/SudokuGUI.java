@@ -8,37 +8,45 @@ import java.awt.event.ActionListener;
  * Created by Ye on 12/10/2015.
  */
 public class SudokuGUI extends JFrame {
-    private String[] diffs = {"Easy", "Medium", "Hard"};
-    private Integer[] sizes = {4, 9, 16, 25};
-    private String difficulty;
+    private int[][] grid;
+    private String[] diffStrings = {"Easy", "Medium", "Hard"};
+    private String[] algStrings = {"Backtrack", "Brute Force", "Constraint"};
+    private String difficulty = "Easy";
     private int gridDimension = 0;
+    private String algorithm = "Backtrack";
 
     private final JPanel panel = new JPanel(new GridBagLayout());
-    private JLabel comboLabel = new JLabel("Please choose a difficulty: ");
-    private JComboBox diffOptions = new JComboBox(diffs);
-    private JLabel dimLabel = new JLabel("Type in a grid dimension size and press enter:");
-    private JTextField dimensionField;
+    private JLabel comboLabel;
+    private JComboBox diffBox;
+    private JLabel dimLabel;
+    private JTextField dimField;
     private SudokuGridPanel sudokuGridPanel;
-    private JButton generate;
+    private JComboBox algBox;
     private JButton run;
 
     public SudokuGUI() {
-        super("JPanel Practice");
+        super("Sudoku AI");
 
-        diffOptions.addActionListener(new ActionListener() {
+        comboLabel = new JLabel("Please choose a difficulty: ");
+
+        diffBox = new JComboBox(diffStrings);
+        diffBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JComboBox cb = (JComboBox) e.getSource();
-                difficulty = (String)cb.getSelectedItem();
+                difficulty = (String) cb.getSelectedItem();
                 System.out.println("Difficulty entered: " + difficulty);
             }
         });
 
-        dimensionField = new JTextField(20);
-        dimensionField.addActionListener(new ActionListener() {
+        dimLabel = new JLabel("Type in a grid dimension size and press enter:");
+
+        dimField = new JTextField(20);
+        dimField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gridDimension = Integer.valueOf(dimensionField.getText());
+                gridDimension = Integer.valueOf(dimField.getText());
+                GridBagConstraints cons = new GridBagConstraints();
                 if (Math.sqrt(gridDimension) - Math.floor(Math.sqrt(gridDimension)) > 0) {
                     // If the difference between integer and double is greater than 0, it's not a perfect square.
                     try { // Throw an error, prompting users to input a perfect square size dimension
@@ -47,35 +55,118 @@ public class SudokuGUI extends JFrame {
                         // Prints the stack trace error, then exits out of the GraphicsProgram window.
                         ex.getCause();
                         JOptionPane.showMessageDialog(null, "Please enter a a valid dimension size " +
-                                "of a perfect square number. \n (i.e. 1, 4, 9, 25...)",
+                                        "of a perfect square number. \n (i.e. 1, 4, 9, 25...)",
                                 "Invalid Dimension", JOptionPane.ERROR_MESSAGE);
                     }
+                } else {
+                    try {
+                        grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
+                        panel.remove(sudokuGridPanel);
+                        sudokuGridPanel = new SudokuGridPanel(gridDimension);
+                        fillJPanel(grid, sudokuGridPanel, cons);
+                    } catch (NullPointerException ex) {
+                        ex.getCause();
+                        JOptionPane.showMessageDialog(null, "I need both a difficulty and a dimension!",
+                                "Invalid Parameters", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
-                GridBagConstraints cons = new GridBagConstraints();
                 cons.anchor = GridBagConstraints.WEST;
                 cons.gridx = 0;
                 cons.gridy = 0;
-                cons.gridheight = 6;
-                panel.remove(sudokuGridPanel);
-                sudokuGridPanel = new SudokuGridPanel(gridDimension);
+                cons.gridheight = 11;
                 panel.add(sudokuGridPanel, cons);
                 pack();
                 System.out.println("Dimension entered: " + gridDimension);
             }
         });
 
-        run = new JButton( new AbstractAction("run") {
+        algBox = new JComboBox(algStrings);
+        algBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox jComboBox = (JComboBox) e.getSource();
+                algorithm = (String) jComboBox.getSelectedItem();
+                System.out.println("Algorithm chosen: " + algorithm);
+            }
+        });
+
+        run = new JButton( new AbstractAction("Run") {
             @Override
             public void actionPerformed( ActionEvent e ) {
+                GridBagConstraints c = new GridBagConstraints();
                 try {
-                    SudokuGrid grid = new SudokuGrid(gridDimension, difficulty);
-                    Backtrack backtrack = new Backtrack(grid.getBackendGrid());
-                    backtrack.implement();
-                    SudokuEvaluator eval = new SudokuEvaluator(grid.getBackendGrid());
-                    eval.evaluate();
+                    switch (algorithm) {
+                        case ("Brute Force"):
+                            grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
+                            int numRuns = 0;
+                            double before = System.currentTimeMillis();
+                            boolean solved;
+                            while (numRuns <= 10000000) {
+                                BruteForce bruteForce = new BruteForce();
+                                int[][] tempGrid = bruteForce.implement(grid);
+                                SudokuEvaluator eval = new SudokuEvaluator(tempGrid);
+                                solved = eval.evaluate();
+                                if (solved) {
+                                    panel.remove(sudokuGridPanel);
+                                    sudokuGridPanel = new SudokuGridPanel(gridDimension);
+                                    fillJPanel(grid, sudokuGridPanel, c);
+                                    break;
+                                }
+                                numRuns++;
+                            }
+                            double end = System.currentTimeMillis();
+                            double time = (end - before)/1000;
+                            JOptionPane.showMessageDialog(null, "Time taken: " + time + "; Runs take: " + numRuns,
+                                    "Notification", JOptionPane.INFORMATION_MESSAGE);
+                            break;
+                        case ("Backtrack"):
+                            grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
+                            Backtrack backtrack = new Backtrack(grid);
+                            boolean solved0;
+                            double before0 = System.currentTimeMillis();
+                            backtrack.implement();
+                            SudokuEvaluator checker = new SudokuEvaluator(grid);
+                            solved0 = checker.evaluate();
+                            double end0 = System.currentTimeMillis();
+                            double time0 = (end0 - before0);
+                            panel.remove(sudokuGridPanel);
+                            sudokuGridPanel = new SudokuGridPanel(gridDimension);
+                            if (solved0) {
+                                fillJPanel(grid, sudokuGridPanel, c);
+                                JOptionPane.showMessageDialog(null, "Time taken to solve: " + time0 + " milliseconds",
+                                        "Solution found", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                fillJPanel(grid, sudokuGridPanel, c);
+                                JOptionPane.showMessageDialog(null, "Unable to find a solution.",
+                                        "No Solution", JOptionPane.ERROR_MESSAGE);
+                            }break;
+                        case ("Constraint"):
+                            grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
+                            Constraint constraint = new Constraint(grid);
+                            boolean solved1;
+                            double before1 = System.currentTimeMillis();
+                            constraint.implement();
+                            SudokuEvaluator ch = new SudokuEvaluator(grid);
+                            solved1 = ch.evaluate();
+                            double end1 = System.currentTimeMillis();
+                            double time1 = (end1 - before1);
+                            panel.remove(sudokuGridPanel);
+                            sudokuGridPanel = new SudokuGridPanel(gridDimension);
+                            if (solved1) {
+                                fillJPanel(grid, sudokuGridPanel, c);
+                                JOptionPane.showMessageDialog(null, "Time taken to solve: " + time1 + " milliseconds",
+                                        "Solution found", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                fillJPanel(grid, sudokuGridPanel, c);
+                                JOptionPane.showMessageDialog(null, "Unable to find a solution.",
+                                        "No Solution", JOptionPane.ERROR_MESSAGE);
+                            }
+                            break;
+                    }
                 } catch (NullPointerException | ArithmeticException | ArrayIndexOutOfBoundsException ex) {
                     ex.getCause();
-                    JOptionPane.showMessageDialog(null, "Please specify valid parameters.",
+                    JOptionPane.showMessageDialog(null, "Please be sure to specify difficulty, " +
+                                    "grid dimension and algorithm to run.",
                             "Invalid Parameters", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
@@ -90,31 +181,80 @@ public class SudokuGUI extends JFrame {
         panel.add(comboLabel, constraints);
 
         constraints.gridy = 1;
-        panel.add(diffOptions, constraints);
+        panel.add(diffBox, constraints);
 
         constraints.gridy = 2;
         panel.add(dimLabel, constraints);
 
         constraints.gridy = 3;
-        panel.add(dimensionField, constraints);
+        panel.add(dimField, constraints);
 
         constraints.gridy = 4;
+        panel.add(algBox, constraints);
+
+        constraints.gridy = 5;
         panel.add(run, constraints);
 
         constraints.anchor = GridBagConstraints.WEST;
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.gridheight = 6;
+        constraints.gridheight = 10;
         sudokuGridPanel = new SudokuGridPanel(gridDimension);
         panel.add(sudokuGridPanel, constraints);
 
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Sudoku Solver"));
-//        Dimension dimension = new Dimension(500, 500);
-//        panel.setPreferredSize(dimension);
         add(panel);
         pack();
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    public void fillJPanel(final int[][] grid, final SudokuGridPanel sudokuGridPanel, GridBagConstraints c) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                if (grid[i][j] != 0) {
+                    JLabel numLabel = new JLabel(Integer.toString(grid[i][j]));
+                    c.gridx = i;
+                    c.gridy = j;
+                    sudokuGridPanel.add(numLabel, c);
+                }
+            }
+        }
+        int divisor = (int) Math.sqrt(gridDimension); // How many divisors we're going to have
+        for (int i = 1; i < divisor; i++) { // From 1 til max divisors:
+            final int dividerLine = i * divisor; // Placement of divisor line
+            JLayeredPane jPanel = new JLayeredPane();
+            Dimension d = new Dimension(0, (grid.length - 1) * sudokuGridPanel.dimension);
+            jPanel.setSize(d);
+            jPanel.setBorder(BorderFactory.createMatteBorder(0, 4, 0, 0, Color.black));
+            c.fill = GridBagConstraints.BOTH;
+            c.gridx = dividerLine;
+            c.gridy = 0;
+            c.gridheight = gridDimension;
+            c.anchor = GridBagConstraints.WEST;
+            sudokuGridPanel.add(jPanel, c);
+        }
+        for (int i = 1; i < divisor; i++) { // From 1 til max divisors:
+            int dividerLine = i * divisor ; // Placement of divisor line
+            JLayeredPane jPanel2 = new JLayeredPane();
+            Dimension d = new Dimension(grid.length*sudokuGridPanel.dimension, 0);
+            jPanel2.setSize(d);
+            jPanel2.setBorder(BorderFactory.createMatteBorder(4, 0, 0, 0, Color.black));
+            c.fill = GridBagConstraints.BOTH;
+            c.gridx = 0;
+            c.gridy = dividerLine;
+            c.gridheight = 0;
+            c.gridwidth = gridDimension;
+            c.anchor = GridBagConstraints.NORTH;
+            sudokuGridPanel.add(jPanel2, c);
+        }
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        c.gridheight = 10;
+        c.anchor = GridBagConstraints.WEST;
+        panel.add(sudokuGridPanel, c);
+        pack();
     }
 
     public String getDifficulty() {
