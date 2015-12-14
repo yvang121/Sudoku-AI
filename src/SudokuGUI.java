@@ -10,10 +10,10 @@ import java.awt.event.ActionListener;
 public class SudokuGUI extends JFrame {
     private int[][] grid;
     private String[] diffStrings = {"Easy", "Medium", "Hard"};
-    private String[] algStrings = {"Backtrack", "Brute Force", "Constraint"};
+    private String[] algStrings = {"BF Backtrack", "Random-Restart", "Most-Constrained"};
     private String difficulty = "Easy";
     private int gridDimension = 0;
-    private String algorithm = "Backtrack";
+    private String algorithm = "BF Backtrack";
 
     private final JPanel panel = new JPanel(new GridBagLayout());
     private JLabel comboLabel;
@@ -97,7 +97,7 @@ public class SudokuGUI extends JFrame {
                 try {
                     System.out.println("Running...");
                     switch (algorithm) {
-                        case ("Brute Force"):
+                        case ("Random-Restart"):
                             grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
                             int numRuns = 0;
                             double before = System.currentTimeMillis();
@@ -122,7 +122,7 @@ public class SudokuGUI extends JFrame {
                             JOptionPane.showMessageDialog(null, "Time taken: " + time + " seconds; Runs taken: " + numRuns,
                                     "Notification", JOptionPane.INFORMATION_MESSAGE);
                             break;
-                        case ("Backtrack"):
+                        case ("BF Backtrack"):
                             grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
                             Backtrack backtrack = new Backtrack(grid);
                             boolean solved0;
@@ -146,7 +146,7 @@ public class SudokuGUI extends JFrame {
                             }
                             panel.setCursor(Cursor.getDefaultCursor());
                             break;
-                        case ("Constraint"):
+                        case ("Most-Constrained"):
                             grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
                             Constraint constraint = new Constraint(grid);
                             boolean solved1;
