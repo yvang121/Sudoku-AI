@@ -22,6 +22,7 @@ public class SudokuGUI extends JFrame {
     private JTextField dimField;
     private SudokuGridPanel sudokuGridPanel;
     private JComboBox algBox;
+    private JButton generate;
     private JButton run;
 
     public SudokuGUI() {
@@ -90,6 +91,17 @@ public class SudokuGUI extends JFrame {
             }
         });
 
+        generate = new JButton(new AbstractAction("Generate") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GridBagConstraints c = new GridBagConstraints();
+                panel.remove(sudokuGridPanel);
+                sudokuGridPanel = new SudokuGridPanel(gridDimension);
+                grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
+                fillJPanel(grid, sudokuGridPanel, c);
+            }
+        });
+
         run = new JButton( new AbstractAction("Run") {
             @Override
             public void actionPerformed( ActionEvent e ) {
@@ -98,7 +110,7 @@ public class SudokuGUI extends JFrame {
                     System.out.println("Running...");
                     switch (algorithm) {
                         case ("Random-Restart"):
-                            grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
+//                            grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
                             int numRuns = 0;
                             double before = System.currentTimeMillis();
                             boolean solved;
@@ -123,7 +135,7 @@ public class SudokuGUI extends JFrame {
                                     "Notification", JOptionPane.INFORMATION_MESSAGE);
                             break;
                         case ("BF Backtrack"):
-                            grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
+//                            grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
                             Backtrack backtrack = new Backtrack(grid);
                             boolean solved0;
                             double before0 = System.currentTimeMillis();
@@ -147,7 +159,7 @@ public class SudokuGUI extends JFrame {
                             panel.setCursor(Cursor.getDefaultCursor());
                             break;
                         case ("Most-Constrained"):
-                            grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
+//                            grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
                             Constraint constraint = new Constraint(grid);
                             boolean solved1;
                             double before1 = System.currentTimeMillis();
@@ -201,6 +213,9 @@ public class SudokuGUI extends JFrame {
         panel.add(algBox, constraints);
 
         constraints.gridy = 5;
+        panel.add(generate, constraints);
+
+        constraints.gridy = 6;
         panel.add(run, constraints);
 
         constraints.anchor = GridBagConstraints.WEST;
