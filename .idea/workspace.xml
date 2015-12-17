@@ -6,16 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="452494fa-d04a-406e-9346-41674b5d28a8" name="Default" comment="Added Constraint Algorithm">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Sudoku_AI_jar/Sudoku-AI.jar" afterPath="$PROJECT_DIR$/out/artifacts/Sudoku_AI_jar/Sudoku-AI.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI$1.class" afterPath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI$2.class" afterPath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI$3.class" afterPath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI$4.class" afterPath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI$5.class" afterPath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI.class" afterPath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="452494fa-d04a-406e-9346-41674b5d28a8" name="Default" comment="Added Constraint Algorithm" />
     <ignored path="Sudoku-AI.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -662,7 +653,7 @@
       <workItem from="1450050586760" duration="614000" />
       <workItem from="1450073441794" duration="1631000" />
       <workItem from="1450310475771" duration="48000" />
-      <workItem from="1450380991807" duration="1170000" />
+      <workItem from="1450380991807" duration="1260000" />
     </task>
     <task id="LOCAL-00007" summary="Changed hard-coded random generator to cap at the size of the grid dimension instead of 9.">
       <created>1447314796758</created>
@@ -962,7 +953,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124793000" />
+    <option name="totallyTimeSpent" value="124883000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
