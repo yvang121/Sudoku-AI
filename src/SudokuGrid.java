@@ -1,7 +1,3 @@
-import acm.graphics.GCompound;
-import acm.graphics.GLabel;
-import acm.graphics.GLine;
-import acm.graphics.GRect;
 import acm.util.RandomGenerator;
 
 /**
@@ -11,6 +7,7 @@ public class SudokuGrid {
     private static final double EASY_MODIFIER = 0.20;
     private static final double MED_MODIFIER = 0.15;
     private static final double HARD_MODIFIER = 0.10;
+    private int initNumbers;
     private int dimension;
     private int subDimension;
     private String difficulty;
@@ -50,18 +47,18 @@ public class SudokuGrid {
         int totalNumValues = dimension * dimension;
         if (difficulty.equals("easy") | difficulty.equals("e")) {
             // How many numbers to generate based on difficulty
-            int numbers = (int) Math.floor(totalNumValues*EASY_MODIFIER);
-            for (int i = 0; i <= numbers; i++) {
+            initNumbers = (int) Math.floor(totalNumValues*EASY_MODIFIER);
+            for (int i = 0; i <= initNumbers; i++) {
                 initGrid();
             }
         } else if (difficulty.equals("med") | (difficulty.equals("medium")) | (difficulty.equals("m"))) {
-            int numbers = (int) Math.ceil(totalNumValues*MED_MODIFIER);
-            for (int i = 0; i <= numbers; i++) {
+            initNumbers = (int) Math.ceil(totalNumValues*MED_MODIFIER);
+            for (int i = 0; i <= initNumbers; i++) {
                 initGrid();
             }
         } else if (difficulty.equals("hard") | difficulty.equals("h")) {
-            int numbers = (int) Math.ceil(totalNumValues*HARD_MODIFIER);
-            for (int i = 0; i <= numbers; i++) {
+            initNumbers = (int) Math.ceil(totalNumValues*HARD_MODIFIER);
+            for (int i = 0; i <= initNumbers; i++) {
                 initGrid();
             }
         }
@@ -169,6 +166,10 @@ public class SudokuGrid {
 
     public static double getHardModifier() {
         return HARD_MODIFIER;
+    }
+
+    public int getInitNumbers() {
+        return initNumbers;
     }
 
     public int[][][] getBackendSubgrid() {
