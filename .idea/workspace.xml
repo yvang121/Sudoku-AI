@@ -654,7 +654,7 @@
       <workItem from="1450073441794" duration="1631000" />
       <workItem from="1450310475771" duration="48000" />
       <workItem from="1450380991807" duration="1567000" />
-      <workItem from="1450403626844" duration="978000" />
+      <workItem from="1450403626844" duration="1009000" />
     </task>
     <task id="LOCAL-00009" summary="Added some print statements.">
       <created>1447317069171</created>
@@ -954,7 +954,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126168000" />
+    <option name="totallyTimeSpent" value="126199000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
