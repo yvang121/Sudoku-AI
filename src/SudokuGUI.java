@@ -14,6 +14,7 @@ public class SudokuGUI extends JFrame {
     private String difficulty = "Easy";
     private int gridDimension = 0;
     private String algorithm = "BF Backtrack";
+    private SudokuGrid sudokuGrid;
 
     private final JPanel panel = new JPanel(new GridBagLayout());
     private JLabel comboLabel;
@@ -61,7 +62,8 @@ public class SudokuGUI extends JFrame {
                     }
                 } else {
                     try {
-                        grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
+                        sudokuGrid = new SudokuGrid(gridDimension, difficulty);
+                        grid = sudokuGrid.getBackendGrid();
                         panel.remove(sudokuGridPanel);
                         sudokuGridPanel = new SudokuGridPanel(gridDimension);
                         fillJPanel(grid, sudokuGridPanel, cons);
@@ -97,7 +99,8 @@ public class SudokuGUI extends JFrame {
                 GridBagConstraints c = new GridBagConstraints();
                 panel.remove(sudokuGridPanel);
                 sudokuGridPanel = new SudokuGridPanel(gridDimension);
-                grid = new SudokuGrid(gridDimension, difficulty).getBackendGrid();
+                sudokuGrid = new SudokuGrid(gridDimension, difficulty);
+                grid = sudokuGrid.getBackendGrid();
                 fillJPanel(grid, sudokuGridPanel, c);
             }
         });
@@ -115,7 +118,8 @@ public class SudokuGUI extends JFrame {
                             double before = System.currentTimeMillis();
                             boolean solved;
                             panel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                            while (numRuns <= 10000000) {
+                            int threshold = (int) Math.pow(gridDimension, (gridDimension*gridDimension)-sudokuGrid.getInitNumbers());
+                            while (numRuns <= threshold*0.75) {
                                 BruteForce bruteForce = new BruteForce();
                                 int[][] tempGrid = bruteForce.implement(grid);
                                 SudokuEvaluator eval = new SudokuEvaluator(tempGrid);
