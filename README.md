@@ -7,3 +7,4 @@ The A* search algorithm, along with the default brute force algorithm was implem
 
 You can get a copy of this program by downloading the Jar executable file <a href="https://github.com/yvang121/Sudoku-AI/blob/master/out/artifacts/Sudoku_AI_jar/Sudoku-AI.jar?raw=true">here</a>.
 
+Developed by Ye Vang and Divino Kenneth Bello.
