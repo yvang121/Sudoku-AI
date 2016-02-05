@@ -6,17 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="452494fa-d04a-406e-9346-41674b5d28a8" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Ye-Vang\Documents\GitHub\Sudoku-AI\out\production\Sudoku-AI\AStar.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ye-Vang\Documents\GitHub\Sudoku-AI\out\production\Sudoku-AI\GridNode.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ye-Vang\Documents\GitHub\Sudoku-AI\out\test\Sudoku-AI\TestAStar.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ye-Vang\Documents\GitHub\Sudoku-AI\src\AStar.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ye-Vang\Documents\GitHub\Sudoku-AI\src\GridNode.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ye-Vang\Documents\GitHub\Sudoku-AI\test\TestAStar.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Sudoku_AI_jar/Sudoku-AI.jar" afterPath="$PROJECT_DIR$/out/artifacts/Sudoku_AI_jar/Sudoku-AI.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI$5.class" afterPath="$PROJECT_DIR$/out/production/Sudoku-AI/SudokuGUI$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="452494fa-d04a-406e-9346-41674b5d28a8" name="Default" comment="" />
     <ignored path="Sudoku-AI.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -665,7 +655,7 @@
       <workItem from="1450380991807" duration="1567000" />
       <workItem from="1450403626844" duration="1063000" />
       <workItem from="1450475213954" duration="259000" />
-      <workItem from="1454636565474" duration="104000" />
+      <workItem from="1454636565474" duration="304000" />
     </task>
     <task id="LOCAL-00009" summary="Added some print statements.">
       <created>1447317069171</created>
@@ -965,7 +955,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126616000" />
+    <option name="totallyTimeSpent" value="126816000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
